@@ -7,21 +7,30 @@
 //
 
 #import "ViewController.h"
+#import "TestDrawView.h"
 
 @interface ViewController ()
-
+@property (nonatomic, strong) TestDrawView *testDrawView;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.testDrawView = [[TestDrawView alloc]init];
+    [self.view addSubview:self.testDrawView];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    self.testDrawView.frame = self.view.bounds;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.testDrawView runAnimation];
 }
 
 @end

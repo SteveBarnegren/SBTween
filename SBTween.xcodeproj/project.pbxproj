@@ -13,6 +13,13 @@
 		09A3EA391C98340900787BCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09A3EA371C98340900787BCB /* Main.storyboard */; };
 		09A3EA3B1C98340900787BCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09A3EA3A1C98340900787BCB /* Assets.xcassets */; };
 		09A3EA3E1C98340900787BCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09A3EA3C1C98340900787BCB /* LaunchScreen.storyboard */; };
+		09A3EA481C9834A200787BCB /* SBTAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA471C9834A200787BCB /* SBTAction.m */; };
+		09A3EA4B1C98354000787BCB /* SBTEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA4A1C98354000787BCB /* SBTEasing.m */; };
+		09A3EA4E1C9858C500787BCB /* SBTActionInterpolate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA4D1C9858C500787BCB /* SBTActionInterpolate.m */; };
+		09A3EA511C985C3300787BCB /* TestDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA501C985C3300787BCB /* TestDrawView.m */; };
+		09A3EA541C985D0C00787BCB /* SBTScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA531C985D0C00787BCB /* SBTScheduler.m */; };
+		09A3EA571C98720F00787BCB /* SBTActionSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA561C98720F00787BCB /* SBTActionSequence.m */; };
+		09A3EA5A1C987A7700787BCB /* SBTActionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA591C987A7700787BCB /* SBTActionGroup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,20 @@
 		09A3EA3A1C98340900787BCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09A3EA3D1C98340900787BCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09A3EA3F1C98340900787BCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09A3EA461C9834A200787BCB /* SBTAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTAction.h; path = SBTween/SBTAction.h; sourceTree = "<group>"; };
+		09A3EA471C9834A200787BCB /* SBTAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTAction.m; path = SBTween/SBTAction.m; sourceTree = "<group>"; };
+		09A3EA491C98354000787BCB /* SBTEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTEasing.h; path = SBTween/SBTEasing.h; sourceTree = "<group>"; };
+		09A3EA4A1C98354000787BCB /* SBTEasing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTEasing.m; path = SBTween/SBTEasing.m; sourceTree = "<group>"; };
+		09A3EA4C1C9858C500787BCB /* SBTActionInterpolate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionInterpolate.h; path = SBTween/SBTActionInterpolate.h; sourceTree = "<group>"; };
+		09A3EA4D1C9858C500787BCB /* SBTActionInterpolate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionInterpolate.m; path = SBTween/SBTActionInterpolate.m; sourceTree = "<group>"; };
+		09A3EA4F1C985C3300787BCB /* TestDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDrawView.h; sourceTree = "<group>"; };
+		09A3EA501C985C3300787BCB /* TestDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDrawView.m; sourceTree = "<group>"; };
+		09A3EA521C985D0C00787BCB /* SBTScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTScheduler.h; path = SBTween/SBTScheduler.h; sourceTree = "<group>"; };
+		09A3EA531C985D0C00787BCB /* SBTScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTScheduler.m; path = SBTween/SBTScheduler.m; sourceTree = "<group>"; };
+		09A3EA551C98720F00787BCB /* SBTActionSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionSequence.h; path = SBTween/SBTActionSequence.h; sourceTree = "<group>"; };
+		09A3EA561C98720F00787BCB /* SBTActionSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionSequence.m; path = SBTween/SBTActionSequence.m; sourceTree = "<group>"; };
+		09A3EA581C987A7700787BCB /* SBTActionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionGroup.h; path = SBTween/SBTActionGroup.h; sourceTree = "<group>"; };
+		09A3EA591C987A7700787BCB /* SBTActionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionGroup.m; path = SBTween/SBTActionGroup.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +79,13 @@
 		09A3EA2D1C98340900787BCB /* SBTween */ = {
 			isa = PBXGroup;
 			children = (
+				09A3EA451C98341B00787BCB /* SBTween */,
 				09A3EA311C98340900787BCB /* AppDelegate.h */,
 				09A3EA321C98340900787BCB /* AppDelegate.m */,
 				09A3EA341C98340900787BCB /* ViewController.h */,
 				09A3EA351C98340900787BCB /* ViewController.m */,
+				09A3EA4F1C985C3300787BCB /* TestDrawView.h */,
+				09A3EA501C985C3300787BCB /* TestDrawView.m */,
 				09A3EA371C98340900787BCB /* Main.storyboard */,
 				09A3EA3A1C98340900787BCB /* Assets.xcassets */,
 				09A3EA3C1C98340900787BCB /* LaunchScreen.storyboard */,
@@ -77,6 +101,25 @@
 				09A3EA2F1C98340900787BCB /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		09A3EA451C98341B00787BCB /* SBTween */ = {
+			isa = PBXGroup;
+			children = (
+				09A3EA461C9834A200787BCB /* SBTAction.h */,
+				09A3EA471C9834A200787BCB /* SBTAction.m */,
+				09A3EA551C98720F00787BCB /* SBTActionSequence.h */,
+				09A3EA561C98720F00787BCB /* SBTActionSequence.m */,
+				09A3EA581C987A7700787BCB /* SBTActionGroup.h */,
+				09A3EA591C987A7700787BCB /* SBTActionGroup.m */,
+				09A3EA4C1C9858C500787BCB /* SBTActionInterpolate.h */,
+				09A3EA4D1C9858C500787BCB /* SBTActionInterpolate.m */,
+				09A3EA491C98354000787BCB /* SBTEasing.h */,
+				09A3EA4A1C98354000787BCB /* SBTEasing.m */,
+				09A3EA521C985D0C00787BCB /* SBTScheduler.h */,
+				09A3EA531C985D0C00787BCB /* SBTScheduler.m */,
+			);
+			name = SBTween;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,8 +192,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A3EA571C98720F00787BCB /* SBTActionSequence.m in Sources */,
 				09A3EA361C98340900787BCB /* ViewController.m in Sources */,
+				09A3EA541C985D0C00787BCB /* SBTScheduler.m in Sources */,
+				09A3EA5A1C987A7700787BCB /* SBTActionGroup.m in Sources */,
 				09A3EA331C98340900787BCB /* AppDelegate.m in Sources */,
+				09A3EA4B1C98354000787BCB /* SBTEasing.m in Sources */,
+				09A3EA511C985C3300787BCB /* TestDrawView.m in Sources */,
+				09A3EA4E1C9858C500787BCB /* SBTActionInterpolate.m in Sources */,
+				09A3EA481C9834A200787BCB /* SBTAction.m in Sources */,
 				09A3EA301C98340900787BCB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
