@@ -37,6 +37,17 @@
         }
     }
     
+    // Tell all of the actions that they are about to start
+    for (SBTAction *action in self.actions) {
+        [action actionWillStart];
+    }
+}
+
+-(void)setContext:(SBTContext *)context{
+    [super setContext:context];
+    for (SBTAction *action in self.actions) {
+        action.context = context;
+    }
 }
 
 #pragma mark - Update
@@ -52,6 +63,5 @@
     }
     
 }
-
 
 @end

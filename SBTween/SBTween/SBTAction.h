@@ -7,16 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SBTVariable.h"
+@class SBTContext;
 
 typedef void (^SBTUpdateBlock)(double t);
 typedef void (^SBTCompletionBlock)();
 
 @interface SBTAction : NSObject
 
+@property (nonatomic, weak) SBTContext *context;
 @property (nonatomic, copy) SBTUpdateBlock updateBlock;
 @property (nonatomic, copy) SBTCompletionBlock completionBlock;
 
 @property double duration;
+@property (nonatomic, strong) NSArray<SBTVariable*> *variables;
+
+
+// LifeCycle
+-(void)actionWillStart;
+-(void)actionWillEnd;
 
 // Update
 -(void)updateWithElapsedDuration:(double)elapsed;

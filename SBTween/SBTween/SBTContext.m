@@ -1,12 +1,12 @@
 //
-//  SBTScheduler.m
+//  SBTContext.m
 //  SBTween
 //
-//  Created by Steven Barnegren on 15/03/2016.
+//  Created by Steven Barnegren on 17/03/2016.
 //  Copyright © 2016 Steve Barnegren. All rights reserved.
 //
 
-#import "SBTScheduler.h"
+#import "SBTContext.h"
 @import QuartzCore;
 
 //********************************************************
@@ -16,13 +16,15 @@
 @interface SBTScheduledAction : NSObject
 @property double elapsedTime;
 @property (nonatomic, strong) SBTAction *action;
+@property (nonatomic, copy) void (^updateBlock)();
 @end
 
 @implementation SBTScheduledAction
 
-+(SBTScheduledAction*)scheduledActionWithAction:(SBTAction*)action{
++(SBTScheduledAction*)scheduledActionWithAction:(SBTAction*)action updateBlock:(void (^)())updateBlock{
     SBTScheduledAction *scheduledAction = [[SBTScheduledAction alloc]init];
     scheduledAction.action = action;
+    scheduledAction.updateBlock = updateBlock;
     return scheduledAction;
 }
 
@@ -36,43 +38,81 @@
 @end
 
 //********************************************************
-#pragma mark - ******* SBTScheduler ******
+#pragma mark - ******* SBTContext ******
 //********************************************************
 
-@interface SBTScheduler ()
-@property (nonatomic, strong) NSMutableArray<SBTScheduledAction*> *scheduledActions;
+@interface SBTContext ()
+@property (nonatomic, strong) NSMutableDictionary *variables;
+@property (nonatomic, strong) NSMutableArray *scheduledActions;
+
 @property (nonatomic, strong) CADisplayLink *displayLink;
 @property BOOL hasReferenceFrameTimeStamp;
 @property double lastFrameTimeStamp;
 @end
 
-@implementation SBTScheduler
+@implementation SBTContext
 
-#pragma mark - Creation
-
-+(id)sharedScheduler {
-    static id sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[self alloc] init];
-    });
-    return sharedInstance;
-}
+#pragma mark - Setup
 
 -(instancetype)init{
     
     if (self = [super init]) {
-        self.scheduledActions = [[NSMutableArray alloc]init];
+        [self setupContext];
     }
     return self;
+}
+
+-(void)setupContext{
+    
+    // Init Properties
+    self.variables = [[NSMutableDictionary alloc]init];
+    self.scheduledActions = [[NSMutableArray alloc]init];
     
 }
 
--(void)runAction:(SBTAction*)action{
-  
-    SBTScheduledAction *scheduledAction = [SBTScheduledAction scheduledActionWithAction:action];
+#pragma mark - Variables
+
+-(void)addVariable:(SBTVariable*)variable{
+    
+    NSAssert(variable.name && variable.name.length != 0, @"SBTVariable must have a name when added to context");
+    [self.variables setObject:variable forKey:variable.name];
+}
+
+-(void)addVariables:(NSArray*)variables{
+    for (SBTVariable *variable in variables) {
+        [self addVariable:variable];
+    }
+}
+
+-(SBTVariable*)variableWithName:(NSString*)name{
+    
+    SBTVariable *variable = self.variables[name];
+    if (!variable) {
+        NSLog(@"Cannot find variable with name %@. Make sure you add the variable to context first", name);
+    }
+    return variable;
+}
+
+#pragma mark - Run Actions
+
+//-(void)runAction:(SBTAction*)action withupdateBlc{
+//    [self addAction:action startRunning:YES];
+//}
+//
+//-(void)addAction:(SBTAction*)action{
+//    [self addAction:action startRunning:NO];
+//}
+
+/* This method could be private and use the above methods for public */
+-(void)addAction:(SBTAction*)action updateBlock:(void (^)())updateBlock startRunning:(BOOL)startRunning{
+    
+    [action actionWillStart];
+    action.context = self;
+    SBTScheduledAction *scheduledAction = [SBTScheduledAction scheduledActionWithAction:action updateBlock:updateBlock];
     [self.scheduledActions addObject:scheduledAction];
-    [self startRunLoop];
+    if (startRunning) {
+        [self startRunLoop];
+    }
 }
 
 -(void)removeScheduledAction:(SBTScheduledAction*)action{
@@ -126,10 +166,13 @@
         scheduledAction.elapsedTime += dt;
         if (scheduledAction.elapsedTime > scheduledAction.action.duration) {
             [scheduledAction.action updateWithTime:1.0];
+            [scheduledAction.action actionWillEnd];
+            if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
             [actionsToRemove addObject:scheduledAction];
         }
         else{
             [scheduledAction.action updateWithTime:scheduledAction.elapsedTime / scheduledAction.action.duration];
+            if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
         }
     }
     
@@ -139,16 +182,3 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-

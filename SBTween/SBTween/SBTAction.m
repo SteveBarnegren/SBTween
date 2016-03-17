@@ -15,6 +15,11 @@
 
 @implementation SBTAction
 
+#pragma makr - LifeCycle
+
+-(void)actionWillStart{/* BASE */}
+-(void)actionWillEnd{/* BASE */}
+
 #pragma mark - Update
 -(void)updateWithElapsedDuration:(double)elapsed{
     

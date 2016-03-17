@@ -9,15 +9,20 @@
 #import "TestDrawView.h"
 #import "SBTActionInterpolate.h"
 #import "SBTActionSequence.h"
-#import "SBTScheduler.h"
 #import "SBTActionGroup.h"
+#import "SBTActionDelay.h"
+#import "SBTVariable.h"
+#import "SBTContext.h"
 
 #define kRadius 5
 
+// Variable names
+#define kVN_xPos @"xPos"
+#define kVN_yPos @"yPos"
+#define kVN_radius @"radius"
+
 @interface TestDrawView ()
-@property float xPos;
-@property float yPos;
-@property float radius;
+@property (nonatomic, strong) SBTContext *context;
 @end
 
 @implementation TestDrawView
@@ -30,93 +35,36 @@
 
 -(void)runAnimation{
     
-    // Start values
-    self.xPos = kRadius;
-    self.yPos = self.frame.size.height/2;
-    self.radius = kRadius;
-    
-    // Move Right
     __weak __typeof__(self) weakSelf = self;
-    SBTActionInterpolate *moveRightAction = [[SBTActionInterpolate alloc]initWithUpdateBlock:^(double t) {
-        
-        float start = 0;
-        float end = self.frame.size.width - kRadius*2;
-        
-        weakSelf.xPos = start + (end - start) * t;
-        [weakSelf setNeedsDisplay];
-        
-    } duration:5];
-    [moveRightAction setTimingFunctionWithMode:SBTTimingModeEaseExponentialInOut];
     
-    // Move Up
-    SBTActionInterpolate *moveUpAction = [[SBTActionInterpolate alloc]initWithUpdateBlock:^(double t) {
-        
-        float start = self.frame.size.height/2;
-        float end = 0;
-        
-        weakSelf.yPos = start + (end - start) * t;
-        [weakSelf setNeedsDisplay];
-        
-    } duration:2];
-    [moveUpAction setTimingFunctionWithMode:SBTTimingModeEaseExponentialInOut];
+    self.context = [[SBTContext alloc]init];
+    NSArray *variables = @[
+                           [[SBTVariable alloc]initWithName:kVN_xPos doubleValue:5.0f],
+                           [[SBTVariable alloc]initWithName:kVN_yPos doubleValue:50.0f],
+                           [[SBTVariable alloc]initWithName:kVN_radius doubleValue:10.0f]
+                           ];
+    [self.context addVariables:variables];
     
-    // Expand
-    SBTActionInterpolate *expandAction = [[SBTActionInterpolate alloc]initWithUpdateBlock:^(double t) {
-        
-        float start = kRadius;
-        float end = kRadius * 3;
-        
-        weakSelf.radius = start + (end - start) * t;
-        [weakSelf setNeedsDisplay];
-        
-    } duration:2];
-    [expandAction setTimingFunctionWithMode:SBTTimingModeEaseExponentialOut];
+    SBTActionInterpolate *move = [[SBTActionInterpolate alloc]initWithVariableName:kVN_xPos doubleValue:100 duration:5];
+    SBTActionInterpolate *grow = [[SBTActionInterpolate alloc]initWithVariableName:kVN_radius doubleValue:30 duration:3];
     
-    // Right and up
-    SBTActionSequence *rightAndUpSequence = [[SBTActionSequence alloc]initWithActions:@[moveRightAction, moveUpAction]];
-    
-    // Move Up
-    SBTActionInterpolate *moveToCentreAction = [[SBTActionInterpolate alloc]initWithUpdateBlock:^(double t) {
-        
-        float startX = self.frame.size.width - kRadius*2;
-        float endX = self.frame.size.width/2;
-        
-        float startY = 0;
-        float endY = self.frame.size.width/2;
-        
-        weakSelf.xPos = startX + (endX - startX) * t;
-        weakSelf.yPos = startY + (endY - startY) * t;
+    SBTActionGroup *moveAndGrow = [[SBTActionGroup alloc]initWithActions:@[move, grow]];
 
+    [self.context addAction:moveAndGrow updateBlock:^{
         [weakSelf setNeedsDisplay];
-        
-    } duration:5];
-    [moveUpAction setTimingFunctionWithMode:SBTTimingModeEaseExponentialInOut];
-    
-    // Expand
-    SBTActionInterpolate *expandAction2 = [[SBTActionInterpolate alloc]initWithUpdateBlock:^(double t) {
-        
-        float start = kRadius * 3;
-        float end = kRadius * 10;
-        
-        weakSelf.radius = start + (end - start) * t;
-        [weakSelf setNeedsDisplay];
-        
-    } duration:10];
-    [expandAction setTimingFunctionWithMode:SBTTimingModeLinear];
-
-    
-    // Group
-    SBTActionGroup *toCentreGroup = [[SBTActionGroup alloc]initWithActions:@[moveToCentreAction, expandAction2]];
-    
-    // Whole ssequence
-    SBTActionSequence *wholeSequence = [[SBTActionSequence alloc]initWithActions:@[rightAndUpSequence, toCentreGroup]];
-    
-    // Schedule
-    [[SBTScheduler sharedScheduler]runAction:wholeSequence];
+    } startRunning:YES];
 }
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
+    
+    if (!self.context) {
+        return;
+    }
+    
+    double xPos = [self.context variableWithName:kVN_xPos].doubleValue;
+    double yPos = [self.context variableWithName:kVN_yPos].doubleValue;
+    double radius = [self.context variableWithName:kVN_radius].doubleValue;
     
     // clear background
     [[UIColor blackColor]set];
@@ -126,9 +74,9 @@
     [[UIColor blueColor]set];
     
     CGRect circleRect;
-    circleRect.origin.x = self.xPos;
-    circleRect.origin.y = self.yPos;
-    circleRect.size = CGSizeMake(self.radius*2, self.radius*2);
+    circleRect.origin.x = xPos;
+    circleRect.origin.y = yPos;
+    circleRect.size = CGSizeMake(radius, radius);
     
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:circleRect];
     [path fill];

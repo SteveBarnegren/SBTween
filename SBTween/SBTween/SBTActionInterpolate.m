@@ -8,6 +8,12 @@
 
 #import "SBTActionInterpolate.h"
 #import "SBTEasing.h"
+#import "SBTContext.h"
+
+@interface SBTActionInterpolate ()
+@property (nonatomic, strong) NSString *variableName;
+@property double doubleValue;
+@end
 
 @implementation SBTActionInterpolate
 
@@ -22,6 +28,22 @@
     return self;
 }
 
+
+-(instancetype)initWithVariableName:(NSString*)name doubleValue:(double)value duration:(double)duration{
+    
+    if (self = [super init]) {
+        self.duration = duration;
+        self.variableName = [NSString stringWithString:name];
+        self.doubleValue = value;
+    }
+    return self;
+}
+
+-(void)actionWillStart{
+    [super actionWillStart];
+    self.startValue = [self.context variableWithName:self.variableName].doubleValue;
+}
+
 #pragma mark - Update
 
 -(void)updateWithTime:(double)t{
@@ -33,10 +55,15 @@
         t = self.timingFunction(t);
     }
     
+    if (self.context) {
+        // We can cache the variable in order to reduce the number of calls to the dictionary
+        SBTVariable *variable = [self.context variableWithName:self.variableName];
+        variable.doubleValue = self.startValue + ((self.doubleValue - self.startValue) * t);
+    }
+    
     if (self.updateBlock) {
         self.updateBlock(t);
     }
-    
 }
 
 #pragma mark - Timing

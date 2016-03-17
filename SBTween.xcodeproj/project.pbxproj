@@ -17,9 +17,11 @@
 		09A3EA4B1C98354000787BCB /* SBTEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA4A1C98354000787BCB /* SBTEasing.m */; };
 		09A3EA4E1C9858C500787BCB /* SBTActionInterpolate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA4D1C9858C500787BCB /* SBTActionInterpolate.m */; };
 		09A3EA511C985C3300787BCB /* TestDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA501C985C3300787BCB /* TestDrawView.m */; };
-		09A3EA541C985D0C00787BCB /* SBTScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA531C985D0C00787BCB /* SBTScheduler.m */; };
 		09A3EA571C98720F00787BCB /* SBTActionSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA561C98720F00787BCB /* SBTActionSequence.m */; };
 		09A3EA5A1C987A7700787BCB /* SBTActionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3EA591C987A7700787BCB /* SBTActionGroup.m */; };
+		09D369041C988383005CB068 /* SBTActionDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D369031C988383005CB068 /* SBTActionDelay.m */; };
+		09D3690B1C996A73005CB068 /* SBTVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D3690A1C996A73005CB068 /* SBTVariable.m */; };
+		09D369591C9AC6EC005CB068 /* SBTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D369581C9AC6EC005CB068 /* SBTContext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,12 +43,16 @@
 		09A3EA4D1C9858C500787BCB /* SBTActionInterpolate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionInterpolate.m; path = SBTween/SBTActionInterpolate.m; sourceTree = "<group>"; };
 		09A3EA4F1C985C3300787BCB /* TestDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDrawView.h; sourceTree = "<group>"; };
 		09A3EA501C985C3300787BCB /* TestDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDrawView.m; sourceTree = "<group>"; };
-		09A3EA521C985D0C00787BCB /* SBTScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTScheduler.h; path = SBTween/SBTScheduler.h; sourceTree = "<group>"; };
-		09A3EA531C985D0C00787BCB /* SBTScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTScheduler.m; path = SBTween/SBTScheduler.m; sourceTree = "<group>"; };
 		09A3EA551C98720F00787BCB /* SBTActionSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionSequence.h; path = SBTween/SBTActionSequence.h; sourceTree = "<group>"; };
 		09A3EA561C98720F00787BCB /* SBTActionSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionSequence.m; path = SBTween/SBTActionSequence.m; sourceTree = "<group>"; };
 		09A3EA581C987A7700787BCB /* SBTActionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionGroup.h; path = SBTween/SBTActionGroup.h; sourceTree = "<group>"; };
 		09A3EA591C987A7700787BCB /* SBTActionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionGroup.m; path = SBTween/SBTActionGroup.m; sourceTree = "<group>"; };
+		09D369021C988383005CB068 /* SBTActionDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionDelay.h; path = SBTween/SBTActionDelay.h; sourceTree = "<group>"; };
+		09D369031C988383005CB068 /* SBTActionDelay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionDelay.m; path = SBTween/SBTActionDelay.m; sourceTree = "<group>"; };
+		09D369091C996A73005CB068 /* SBTVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTVariable.h; path = SBTween/SBTVariable.h; sourceTree = "<group>"; };
+		09D3690A1C996A73005CB068 /* SBTVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTVariable.m; path = SBTween/SBTVariable.m; sourceTree = "<group>"; };
+		09D369571C9AC6EC005CB068 /* SBTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTContext.h; path = SBTween/SBTContext.h; sourceTree = "<group>"; };
+		09D369581C9AC6EC005CB068 /* SBTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTContext.m; path = SBTween/SBTContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,20 @@
 		09A3EA451C98341B00787BCB /* SBTween */ = {
 			isa = PBXGroup;
 			children = (
+				09D369051C99685C005CB068 /* Actions */,
+				09A3EA491C98354000787BCB /* SBTEasing.h */,
+				09A3EA4A1C98354000787BCB /* SBTEasing.m */,
+				09D369571C9AC6EC005CB068 /* SBTContext.h */,
+				09D369581C9AC6EC005CB068 /* SBTContext.m */,
+				09D369091C996A73005CB068 /* SBTVariable.h */,
+				09D3690A1C996A73005CB068 /* SBTVariable.m */,
+			);
+			name = SBTween;
+			sourceTree = "<group>";
+		};
+		09D369051C99685C005CB068 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
 				09A3EA461C9834A200787BCB /* SBTAction.h */,
 				09A3EA471C9834A200787BCB /* SBTAction.m */,
 				09A3EA551C98720F00787BCB /* SBTActionSequence.h */,
@@ -114,12 +134,10 @@
 				09A3EA591C987A7700787BCB /* SBTActionGroup.m */,
 				09A3EA4C1C9858C500787BCB /* SBTActionInterpolate.h */,
 				09A3EA4D1C9858C500787BCB /* SBTActionInterpolate.m */,
-				09A3EA491C98354000787BCB /* SBTEasing.h */,
-				09A3EA4A1C98354000787BCB /* SBTEasing.m */,
-				09A3EA521C985D0C00787BCB /* SBTScheduler.h */,
-				09A3EA531C985D0C00787BCB /* SBTScheduler.m */,
+				09D369021C988383005CB068 /* SBTActionDelay.h */,
+				09D369031C988383005CB068 /* SBTActionDelay.m */,
 			);
-			name = SBTween;
+			name = Actions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,12 +212,14 @@
 			files = (
 				09A3EA571C98720F00787BCB /* SBTActionSequence.m in Sources */,
 				09A3EA361C98340900787BCB /* ViewController.m in Sources */,
-				09A3EA541C985D0C00787BCB /* SBTScheduler.m in Sources */,
+				09D369591C9AC6EC005CB068 /* SBTContext.m in Sources */,
+				09D3690B1C996A73005CB068 /* SBTVariable.m in Sources */,
 				09A3EA5A1C987A7700787BCB /* SBTActionGroup.m in Sources */,
 				09A3EA331C98340900787BCB /* AppDelegate.m in Sources */,
 				09A3EA4B1C98354000787BCB /* SBTEasing.m in Sources */,
 				09A3EA511C985C3300787BCB /* TestDrawView.m in Sources */,
 				09A3EA4E1C9858C500787BCB /* SBTActionInterpolate.m in Sources */,
+				09D369041C988383005CB068 /* SBTActionDelay.m in Sources */,
 				09A3EA481C9834A200787BCB /* SBTAction.m in Sources */,
 				09A3EA301C98340900787BCB /* main.m in Sources */,
 			);
@@ -350,6 +370,7 @@
 				09A3EA441C98340900787BCB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
