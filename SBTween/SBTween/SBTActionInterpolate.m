@@ -12,41 +12,65 @@
 
 @interface SBTActionInterpolate ()
 @property (nonatomic, strong) NSString *variableName;
-@property double doubleValue;
+@property (nonatomic, copy) SBTValue *startValue;
+@property (nonatomic, copy) SBTValue *targetValue;
 @end
 
 @implementation SBTActionInterpolate
 
 #pragma mark - Creation
 
--(instancetype)initWithUpdateBlock:(SBTUpdateBlock)updateBlock duration:(double)duration{
-    
+-(instancetype)initWithVariableName:(NSString*)name doubleValue:(double)doubleValue duration:(double)duration{
     if (self = [super init]) {
-        self.updateBlock = updateBlock;
         self.duration = duration;
+        self.variableName = [NSString stringWithString:name];
+        self.targetValue = [SBTValue valueWithDouble:doubleValue];
     }
     return self;
 }
 
-
--(instancetype)initWithVariableName:(NSString*)name doubleValue:(double)value duration:(double)duration{
-    
+-(instancetype)initWithVariableName:(NSString*)name vec2Value:(SBTVec2)vec2Value duration:(double)duration{
     if (self = [super init]) {
         self.duration = duration;
         self.variableName = [NSString stringWithString:name];
-        self.doubleValue = value;
+        self.targetValue = [SBTValue valueWithVec2:vec2Value];
+    }
+    return self;
+}
+
+-(instancetype)initWithVariableName:(NSString*)name vec3Value:(SBTVec3)vec3Value duration:(double)duration{
+    if (self = [super init]) {
+        self.duration = duration;
+        self.variableName = [NSString stringWithString:name];
+        self.targetValue = [SBTValue valueWithVec3:vec3Value];
+    }
+    return self;
+}
+
+-(instancetype)initWithVariableName:(NSString*)name vec4Value:(SBTVec4)vec4Value duration:(double)duration{
+    if (self = [super init]) {
+        self.duration = duration;
+        self.variableName = [NSString stringWithString:name];
+        self.targetValue = [SBTValue valueWithVec4:vec4Value];
     }
     return self;
 }
 
 -(void)actionWillStart{
     [super actionWillStart];
-    self.startValue = [self.context variableWithName:self.variableName].doubleValue;
+    NSLog(@"get start value!");
+    self.startValue = [self.context variableWithName:self.variableName].value;
+    NSAssert2(self.startValue.type == self.targetValue.type,
+              @"Action and Variable types must match! (Action has data type %@, but variable has type %@)",
+              SBTValueTypeToString(self.targetValue.type),
+              SBTValueTypeToString(self.startValue.type));
 }
 
 #pragma mark - Update
 
 -(void)updateWithTime:(double)t{
+    
+    NSLog(@"t: %f", t);
     
     t = MAX(0, t);
     t = MIN(1, t);
@@ -58,12 +82,51 @@
     if (self.context) {
         // We can cache the variable in order to reduce the number of calls to the dictionary
         SBTVariable *variable = [self.context variableWithName:self.variableName];
-        variable.doubleValue = self.startValue + ((self.doubleValue - self.startValue) * t);
+        
+        switch (self.targetValue.type) {
+            case SBTValueTypeDouble: [self updateVariable:variable doubleValueWithTime:t]; break;
+            case SBTValueTypeVec2: [self updateVariable:variable vec2ValueWithTime:t]; break;
+            case SBTValueTypeVec3: [self updateVariable:variable vec3ValueWithTime:t]; break;
+            case SBTValueTypeVec4: [self updateVariable:variable vec4ValueWithTime:t]; break;
+            default:
+                NSAssert(NO, @"Unknown value type");
+                break;
+        }
     }
     
     if (self.updateBlock) {
         self.updateBlock(t);
     }
+}
+
+-(void)updateVariable:(SBTVariable*)variable doubleValueWithTime:(double)t{
+    double start = self.startValue.doubleValue;
+    double target = self.targetValue.doubleValue;
+    variable.value.doubleValue = start + ((target - start) * t);
+}
+
+-(void)updateVariable:(SBTVariable*)variable vec2ValueWithTime:(double)t{
+    SBTVec2 start = self.startValue.vec2Value;
+    SBTVec2 target = self.targetValue.vec2Value;
+    variable.value.vec2Value = SBTVec2Make(start.x + ((target.x - start.x) * t),
+                                           start.y + ((target.y - start.y) * t));
+}
+
+-(void)updateVariable:(SBTVariable*)variable vec3ValueWithTime:(double)t{
+    SBTVec3 start = self.startValue.vec3Value;
+    SBTVec3 target = self.targetValue.vec3Value;
+    variable.value.vec3Value = SBTVec3Make(start.x + ((target.x - start.x) * t),
+                                           start.y + ((target.y - start.y) * t),
+                                           start.z + ((target.z - start.z) * t));
+}
+
+-(void)updateVariable:(SBTVariable*)variable vec4ValueWithTime:(double)t{
+    SBTVec4 start = self.startValue.vec4Value;
+    SBTVec4 target = self.targetValue.vec4Value;
+    variable.value.vec4Value = SBTVec4Make(start.x + ((target.x - start.x) * t),
+                                           start.y + ((target.y - start.y) * t),
+                                           start.z + ((target.z - start.z) * t),
+                                           start.w + ((target.w - start.w) * t));
 }
 
 #pragma mark - Timing

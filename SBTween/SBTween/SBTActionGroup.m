@@ -36,8 +36,10 @@
             self.duration = action.duration;
         }
     }
-    
-    // Tell all of the actions that they are about to start
+}
+
+-(void)actionWillStart{
+    [super actionWillStart];
     for (SBTAction *action in self.actions) {
         [action actionWillStart];
     }

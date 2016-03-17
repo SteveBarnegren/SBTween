@@ -106,8 +106,8 @@
 /* This method could be private and use the above methods for public */
 -(void)addAction:(SBTAction*)action updateBlock:(void (^)())updateBlock startRunning:(BOOL)startRunning{
     
-    [action actionWillStart];
     action.context = self;
+    [action actionWillStart];
     SBTScheduledAction *scheduledAction = [SBTScheduledAction scheduledActionWithAction:action updateBlock:updateBlock];
     [self.scheduledActions addObject:scheduledAction];
     if (startRunning) {

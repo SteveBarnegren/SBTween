@@ -19,12 +19,13 @@ typedef enum : NSUInteger {
 
 @interface SBTActionInterpolate : SBTAction
 
-@property double startValue;
 @property (nonatomic, copy) SBTTimingFunction timingFunction;
 
 // Creation
--(instancetype)initWithUpdateBlock:(SBTUpdateBlock)updateBlock duration:(double)duration;
--(instancetype)initWithVariableName:(NSString*)name doubleValue:(double)value duration:(double)duration;
+-(instancetype)initWithVariableName:(NSString*)name doubleValue:(double)doubleValue duration:(double)duration;
+-(instancetype)initWithVariableName:(NSString*)name vec2Value:(SBTVec2)vec2Value duration:(double)duration;
+-(instancetype)initWithVariableName:(NSString*)name vec3Value:(SBTVec3)vec3Value duration:(double)duration;
+-(instancetype)initWithVariableName:(NSString*)name vec4Value:(SBTVec4)vec4Value duration:(double)duration;
 
 // Timing
 -(void)setTimingFunctionWithMode:(SBTTimingMode)timingMode;

@@ -17,8 +17,8 @@
 #define kRadius 5
 
 // Variable names
-#define kVN_xPos @"xPos"
-#define kVN_yPos @"yPos"
+#define kVN_Position @"Position"
+
 #define kVN_radius @"radius"
 
 @interface TestDrawView ()
@@ -39,13 +39,15 @@
     
     self.context = [[SBTContext alloc]init];
     NSArray *variables = @[
-                           [[SBTVariable alloc]initWithName:kVN_xPos doubleValue:5.0f],
-                           [[SBTVariable alloc]initWithName:kVN_yPos doubleValue:50.0f],
+                           [[SBTVariable alloc]initWithName:kVN_Position vec2Value:SBTVec2Make(50, 50)],
                            [[SBTVariable alloc]initWithName:kVN_radius doubleValue:10.0f]
                            ];
     [self.context addVariables:variables];
     
-    SBTActionInterpolate *move = [[SBTActionInterpolate alloc]initWithVariableName:kVN_xPos doubleValue:100 duration:5];
+    SBTActionInterpolate *move = [[SBTActionInterpolate alloc]initWithVariableName:kVN_Position
+                                                                         vec2Value:SBTVec2Make(300, 300)
+                                                                          duration:5];
+    
     SBTActionInterpolate *grow = [[SBTActionInterpolate alloc]initWithVariableName:kVN_radius doubleValue:30 duration:3];
     
     SBTActionGroup *moveAndGrow = [[SBTActionGroup alloc]initWithActions:@[move, grow]];
@@ -62,9 +64,9 @@
         return;
     }
     
-    double xPos = [self.context variableWithName:kVN_xPos].doubleValue;
-    double yPos = [self.context variableWithName:kVN_yPos].doubleValue;
-    double radius = [self.context variableWithName:kVN_radius].doubleValue;
+    double xPos = [self.context variableWithName:kVN_Position].value.vec2Value.x;
+    double yPos = [self.context variableWithName:kVN_Position].value.vec2Value.y;
+    double radius = [self.context variableWithName:kVN_radius].value.doubleValue;
     
     // clear background
     [[UIColor blackColor]set];
@@ -81,5 +83,6 @@
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:circleRect];
     [path fill];
 }
+
 
 @end
