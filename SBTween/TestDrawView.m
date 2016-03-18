@@ -13,6 +13,7 @@
 #import "SBTActionDelay.h"
 #import "SBTVariable.h"
 #import "SBTContext.h"
+#import "SBTActionCallBlock.h"
 
 #define kRadius 5
 
@@ -37,6 +38,13 @@
     
     __weak __typeof__(self) weakSelf = self;
     
+    SBTActionCallBlock *callBlock1 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 1"); }];
+    SBTActionCallBlock *callBlock2 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 2"); }];
+    SBTActionCallBlock *callBlock3 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 3"); }];
+    SBTActionCallBlock *callBlock4 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 4"); }];
+    SBTActionCallBlock *callBlock5 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 5"); }];
+
+
     self.context = [[SBTContext alloc]init];
     NSArray *variables = @[
                            [[SBTVariable alloc]initWithName:kVN_Position vec2Value:SBTVec2Make(50, 50)],
@@ -50,9 +58,11 @@
     
     SBTActionInterpolate *grow = [[SBTActionInterpolate alloc]initWithVariableName:kVN_radius doubleValue:30 duration:3];
     
-    SBTActionGroup *moveAndGrow = [[SBTActionGroup alloc]initWithActions:@[move, grow]];
+    SBTActionGroup *moveAndGrowGRP = [[SBTActionGroup alloc]initWithActions:@[move, grow]];
+    
+    SBTActionSequence *moveAndGrowSequence = [[SBTActionSequence alloc]initWithActions:@[callBlock1, move, callBlock2, grow, callBlock3]];
 
-    [self.context addAction:moveAndGrow updateBlock:^{
+    [self.context addAction:moveAndGrowSequence updateBlock:^{
         [weakSelf setNeedsDisplay];
     } startRunning:YES];
 }

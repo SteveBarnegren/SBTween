@@ -15,6 +15,13 @@
 
 @implementation SBTAction
 
+-(instancetype)init{
+    if (self = [super init]) {
+        self.hasDuration = YES;
+    }
+    return self;
+}
+
 #pragma makr - LifeCycle
 
 -(void)actionWillStart{/* BASE */}

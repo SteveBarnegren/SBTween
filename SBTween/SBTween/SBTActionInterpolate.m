@@ -69,9 +69,7 @@
 #pragma mark - Update
 
 -(void)updateWithTime:(double)t{
-    
-    NSLog(@"t: %f", t);
-    
+        
     t = MAX(0, t);
     t = MIN(1, t);
     

@@ -20,6 +20,7 @@ typedef void (^SBTCompletionBlock)();
 @property (nonatomic, copy) SBTCompletionBlock completionBlock;
 
 @property double duration;
+@property BOOL hasDuration;
 @property (nonatomic, strong) NSArray<SBTVariable*> *variables;
 
 

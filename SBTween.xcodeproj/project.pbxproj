@@ -22,6 +22,7 @@
 		09D369041C988383005CB068 /* SBTActionDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D369031C988383005CB068 /* SBTActionDelay.m */; };
 		09D3690B1C996A73005CB068 /* SBTVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D3690A1C996A73005CB068 /* SBTVariable.m */; };
 		09D369591C9AC6EC005CB068 /* SBTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D369581C9AC6EC005CB068 /* SBTContext.m */; };
+		09D3695C1C9B242D005CB068 /* SBTActionCallBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		09D3690A1C996A73005CB068 /* SBTVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTVariable.m; path = SBTween/SBTVariable.m; sourceTree = "<group>"; };
 		09D369571C9AC6EC005CB068 /* SBTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTContext.h; path = SBTween/SBTContext.h; sourceTree = "<group>"; };
 		09D369581C9AC6EC005CB068 /* SBTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTContext.m; path = SBTween/SBTContext.m; sourceTree = "<group>"; };
+		09D3695A1C9B242D005CB068 /* SBTActionCallBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionCallBlock.h; path = SBTween/SBTActionCallBlock.h; sourceTree = "<group>"; };
+		09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionCallBlock.m; path = SBTween/SBTActionCallBlock.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +139,8 @@
 				09A3EA4D1C9858C500787BCB /* SBTActionInterpolate.m */,
 				09D369021C988383005CB068 /* SBTActionDelay.h */,
 				09D369031C988383005CB068 /* SBTActionDelay.m */,
+				09D3695A1C9B242D005CB068 /* SBTActionCallBlock.h */,
+				09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09A3EA571C98720F00787BCB /* SBTActionSequence.m in Sources */,
+				09D3695C1C9B242D005CB068 /* SBTActionCallBlock.m in Sources */,
 				09A3EA361C98340900787BCB /* ViewController.m in Sources */,
 				09D369591C9AC6EC005CB068 /* SBTContext.m in Sources */,
 				09D3690B1C996A73005CB068 /* SBTVariable.m in Sources */,

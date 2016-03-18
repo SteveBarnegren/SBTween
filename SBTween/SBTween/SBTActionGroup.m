@@ -10,6 +10,7 @@
 
 @interface SBTActionGroup ()
 @property (nonatomic, strong) NSArray<SBTAction*> *actions;
+@property double lastUpdateTime;
 @end
 
 @implementation SBTActionGroup
@@ -19,6 +20,7 @@
 -(instancetype)initWithActions:(NSArray<SBTAction*>*)actions{
     
     if (self = [super init]) {
+        self.lastUpdateTime = 0;
         [self setupActionGroupWithActions:actions];
     }
     
@@ -57,13 +59,37 @@
 -(void)updateWithTime:(double)t{
     
     double elapsedTime = t * self.duration;
-        
+    double lastElapsedTime = self.lastUpdateTime * self.duration;
+    
     for (SBTAction *action in self.actions) {
         if (action.duration >= elapsedTime) {
             [action updateWithElapsedDuration:elapsedTime];
         }
+        
+        if (lastElapsedTime < action.duration && elapsedTime >= action.duration) {
+            [action actionWillEnd];
+        }
+
     }
+    
+    self.lastUpdateTime = t;
     
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
