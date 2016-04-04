@@ -21,6 +21,7 @@ typedef void (^SBTCompletionBlock)();
 
 @property double duration;
 @property BOOL hasDuration;
+@property BOOL reverse;
 @property (nonatomic, strong) NSArray<SBTVariable*> *variables;
 
 

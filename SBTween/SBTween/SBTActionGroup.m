@@ -60,6 +60,13 @@
     }
 }
 
+-(void)setReverse:(BOOL)reverse{
+    [super setReverse:reverse];
+    for (SBTAction *action in self.actions) {
+        action.reverse = reverse;
+    }
+}
+
 #pragma mark - Update
 
 -(void)updateWithTime:(double)t{

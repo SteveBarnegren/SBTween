@@ -18,6 +18,6 @@
 -(SBTVariable*)variableWithName:(NSString*)name;
 
 // Actions
--(void)addAction:(SBTAction*)action updateBlock:(void (^)())updateBlock startRunning:(BOOL)startRunning;
+-(void)addAction:(SBTAction*)action reverse:(BOOL)reverse updateBlock:(void (^)())updateBlock startRunning:(BOOL)startRunning;
 
 @end

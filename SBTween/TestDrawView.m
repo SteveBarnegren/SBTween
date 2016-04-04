@@ -53,7 +53,7 @@
     [self.context addVariables:variables];
     
     SBTActionInterpolate *move = [[SBTActionInterpolate alloc]initWithVariableName:kVN_Position
-                                                                         vec2Value:SBTVec2Make(300, 300)
+                                                                         vec2Value:SBTVec2Make(200, 200)
                                                                           duration:5];
     
     SBTActionInterpolate *grow = [[SBTActionInterpolate alloc]initWithVariableName:kVN_radius doubleValue:30 duration:3];
@@ -61,10 +61,14 @@
     SBTActionGroup *moveAndGrowGRP = [[SBTActionGroup alloc]initWithActions:@[move, grow]];
     
     SBTActionSequence *moveAndGrowSequence = [[SBTActionSequence alloc]initWithActions:@[callBlock1, move, callBlock2, grow, callBlock3]];
-
-    [self.context addAction:moveAndGrowSequence updateBlock:^{
+    
+    [self.context addAction:moveAndGrowSequence reverse:YES updateBlock:^{
         [weakSelf setNeedsDisplay];
     } startRunning:YES];
+
+//    [self.context addAction:moveAndGrowSequence updateBlock:^{
+//        [weakSelf setNeedsDisplay];
+//    } startRunning:YES];
 }
 
 - (void)drawRect:(CGRect)rect {

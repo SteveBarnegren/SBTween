@@ -30,6 +30,12 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    [self performSelector:@selector(runAnimation) withObject:nil afterDelay:2];
+}
+
+-(void)runAnimation{
+    NSLog(@"***** Run Animation *****");
     [self.testDrawView runAnimation];
 }
 

@@ -15,16 +15,22 @@
 
 @interface SBTScheduledAction : NSObject
 @property double elapsedTime;
+@property BOOL reverse;
 @property (nonatomic, strong) SBTAction *action;
 @property (nonatomic, copy) void (^updateBlock)();
 @end
 
 @implementation SBTScheduledAction
 
-+(SBTScheduledAction*)scheduledActionWithAction:(SBTAction*)action updateBlock:(void (^)())updateBlock{
++(SBTScheduledAction*)scheduledActionWithAction:(SBTAction*)action reverse:(BOOL)reverse updateBlock:(void (^)())updateBlock{
     SBTScheduledAction *scheduledAction = [[SBTScheduledAction alloc]init];
     scheduledAction.action = action;
     scheduledAction.updateBlock = updateBlock;
+    scheduledAction.reverse = reverse;
+    if (reverse) {
+        scheduledAction.elapsedTime = action.duration;
+    }
+    scheduledAction.action.reverse = reverse;
     return scheduledAction;
 }
 
@@ -104,12 +110,14 @@
 //}
 
 /* This method could be private and use the above methods for public */
--(void)addAction:(SBTAction*)action updateBlock:(void (^)())updateBlock startRunning:(BOOL)startRunning{
+-(void)addAction:(SBTAction*)action reverse:(BOOL)reverse updateBlock:(void (^)())updateBlock startRunning:(BOOL)startRunning{
     
     action.context = self;
     [action calculateValuesWithVariables:[NSMutableDictionary dictionary]];
     [action actionWillStart];
-    SBTScheduledAction *scheduledAction = [SBTScheduledAction scheduledActionWithAction:action updateBlock:updateBlock];
+    SBTScheduledAction *scheduledAction = [SBTScheduledAction scheduledActionWithAction:action
+                                                                                reverse:reverse
+                                                                            updateBlock:updateBlock];
     [self.scheduledActions addObject:scheduledAction];
     if (startRunning) {
         [self startRunLoop];
@@ -165,12 +173,23 @@
     NSMutableArray *actionsToRemove = [[NSMutableArray alloc]init];
     
     for (SBTScheduledAction *scheduledAction in self.scheduledActions) {
-        scheduledAction.elapsedTime += dt;
-        if (scheduledAction.elapsedTime > scheduledAction.action.duration) {
+        scheduledAction.elapsedTime += scheduledAction.reverse ? -dt : dt;
+        
+        if (scheduledAction.elapsedTime >= scheduledAction.action.duration) {
             [scheduledAction.action updateWithTime:1.0];
-            [scheduledAction.action actionWillEnd];
-            if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
-            [actionsToRemove addObject:scheduledAction];
+            if (!scheduledAction.reverse) {
+                [scheduledAction.action actionWillEnd];
+                if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
+                [actionsToRemove addObject:scheduledAction];
+            }
+        }
+        else if (scheduledAction.elapsedTime <= 0) {
+            [scheduledAction.action updateWithTime:0];
+            if (scheduledAction.reverse) {
+                [scheduledAction.action actionWillEnd];
+                if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
+                [actionsToRemove addObject:scheduledAction];
+            }
         }
         else{
             [scheduledAction.action updateWithTime:scheduledAction.elapsedTime / scheduledAction.action.duration];

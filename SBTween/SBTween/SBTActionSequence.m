@@ -104,6 +104,13 @@
     }
 }
 
+-(void)setReverse:(BOOL)reverse{
+    [super setReverse:reverse];
+    for (SBTAction *action in self.allActions) {
+        action.reverse = reverse;
+    }
+}
+
 #pragma mark - Update
 
 -(void)updateWithTime:(double)t{
@@ -115,10 +122,66 @@
     
     double lastElapsedTime = self.lastUpdateTime * self.duration;
     double elapsedTime = t * self.duration;
-
-    double actionStart = 0;
+   
+    // Get actions begin and end times
+    double startTimes[self.updateActions.count];
+    double endTimes[self.updateActions.count];
+    {
+        double startPosition = 0;
+        NSInteger index = 0;
+        for (SBTAction *action in self.updateActions) {
+            startTimes[index] = startPosition;
+            endTimes[index] = action.hasDuration ? startPosition + action.duration : startPosition;
+            startPosition += action.duration;
+            index++;
+        }
+    }
     
-    NSInteger index = 0;
+    // Update
+    BOOL startedActionChain = NO;
+    if (!self.lastRunAction) {
+        startedActionChain = YES;
+    }
+    
+    NSInteger actionIndex = self.reverse ? self.updateActions.count-1 : 0;
+    for (SBTAction *action in self.reverse? self.updateActions.reverseObjectEnumerator : self.updateActions) {
+        
+        if (!startedActionChain && action == self.lastRunAction) {
+            startedActionChain = YES;
+        }
+        
+        if (!startedActionChain) {
+            actionIndex += self.reverse ? -1 : 1;
+            continue;
+        }
+        
+        double actionStart = startTimes[actionIndex];
+        double actionEnd = endTimes[actionIndex];
+
+        // Skipped action
+        if (action != self.lastRunAction
+            && actionStart >= lastElapsedTime
+            && actionEnd < elapsedTime) {
+            
+            [action actionWillStart];
+            [action actionWillEnd];
+        }
+        // Current Action
+        else if ((!self.reverse && elapsedTime < actionEnd) || (self.reverse && elapsedTime > actionStart)) {
+            if (self.lastRunAction != action) {
+                [action actionWillStart];
+                self.lastRunAction = action;
+            }
+            [action updateWithElapsedDuration:elapsedTime - actionStart];
+            break;
+        }
+
+        actionIndex += self.reverse ? -1 : 1;
+        //self.reverse ? actionIndex-- : actionIndex++;
+        
+    }
+
+    /*
     for (SBTAction *action in self.updateActions) {
         
         double actionEnd = actionStart + action.duration;
@@ -141,6 +204,7 @@
         actionStart += action.duration;
         index++;
     }
+     */
     
     self.lastUpdateTime = t;
 }

@@ -18,6 +18,7 @@
 -(instancetype)init{
     if (self = [super init]) {
         self.hasDuration = YES;
+        self.reverse = NO;
     }
     return self;
 }
