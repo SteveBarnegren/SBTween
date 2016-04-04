@@ -27,6 +27,8 @@ typedef enum : NSUInteger {
 -(instancetype)initWithVariableName:(NSString*)name vec3Value:(SBTVec3)vec3Value duration:(double)duration;
 -(instancetype)initWithVariableName:(NSString*)name vec4Value:(SBTVec4)vec4Value duration:(double)duration;
 
+-(instancetype)initWithVariableName:(NSString*)name vec2Value:(SBTVec2)vec2Value speed:(double)speed;
+
 // Timing
 -(void)setTimingFunctionWithMode:(SBTTimingMode)timingMode;
 

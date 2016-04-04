@@ -63,8 +63,8 @@
     [self.context addVariables:variables];
     
     SBTActionInterpolate *move = [[SBTActionInterpolate alloc]initWithVariableName:kVN_Position
-                                                                         vec2Value:SBTVec2Make(200, 200)
-                                                                          duration:5];
+                                                                         vec2Value:SBTVec2Make(100, 100)
+                                                                          speed:100];
     
     SBTActionInterpolate *grow = [[SBTActionInterpolate alloc]initWithVariableName:kVN_radius doubleValue:30 duration:3];
     [grow setBecomeActiveCallback:^{

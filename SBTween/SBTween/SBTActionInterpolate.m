@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSString *variableName;
 @property (nonatomic, copy) SBTValue *startValue;
 @property (nonatomic, copy) SBTValue *targetValue;
+@property BOOL useSpeedBasedDuration;
+@property double speed;
 @end
 
 @implementation SBTActionInterpolate
@@ -56,6 +58,16 @@
     return self;
 }
 
+-(instancetype)initWithVariableName:(NSString*)name vec2Value:(SBTVec2)vec2Value speed:(double)speed{
+    if (self = [super init]) {
+        self.speed = speed;
+        self.useSpeedBasedDuration = YES;
+        self.variableName = [NSString stringWithString:name];
+        self.targetValue = [SBTValue valueWithVec2:vec2Value];
+    }
+    return self;
+}
+
 -(void)actionWillStart{
     [super actionWillStart];
    // NSLog(@"get start value!");
@@ -67,6 +79,8 @@
               SBTValueTypeToString(self.targetValue.type),
               SBTValueTypeToString(self.startValue.type));
 }
+
+#pragma mark - Setup values and variables state
 
 -(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{
 
@@ -81,6 +95,27 @@
     
     self.startValue = [variable.value copy];
     variable.value = [self.targetValue copy];
+    
+    if (self.useSpeedBasedDuration) {
+        [self setDurationBasedOnSpeed];
+    }
+}
+
+-(void)setDurationBasedOnSpeed{
+    
+    switch (self.targetValue.type) {
+        case SBTValueTypeVec2:
+        {
+            double xDiff = self.targetValue.vec2Value.x - self.startValue.vec2Value.x;
+            double yDiff = self.targetValue.vec2Value.y - self.startValue.vec2Value.y;
+            double dist = sqrt((xDiff * xDiff)+(yDiff * yDiff));
+            self.duration = dist / self.speed;
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 -(void)setVariablesToEndStates{
