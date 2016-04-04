@@ -67,6 +67,13 @@
     }
 }
 
+-(void)setVariablesToEndStates{
+    
+    for (SBTAction *action in self.actions) {
+        [action setVariablesToEndStates];
+    }
+}
+
 #pragma mark - Update
 
 -(void)updateWithTime:(double)t{

@@ -24,9 +24,9 @@ typedef void (^SBTCompletionBlock)();
 @property BOOL reverse;
 @property (nonatomic, strong) NSArray<SBTVariable*> *variables;
 
-
 // LifeCycle
 -(void)calculateValuesWithVariables:(NSMutableDictionary*)variables;
+-(void)setVariablesToEndStates;
 -(void)actionWasAddedToContext;
 -(void)actionWillStart;
 -(void)actionWillEnd;

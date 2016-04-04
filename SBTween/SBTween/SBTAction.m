@@ -25,6 +25,7 @@
 
 #pragma mark - LifeCycle
 -(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{/* BASE */}
+-(void)setVariablesToEndStates{/* BASE */}
 -(void)actionWasAddedToContext{/* BASE */}
 -(void)actionWillStart{/* BASE */}
 -(void)actionWillEnd{/* BASE */}

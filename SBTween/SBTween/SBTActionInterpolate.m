@@ -83,6 +83,12 @@
     variable.value = [self.targetValue copy];
 }
 
+-(void)setVariablesToEndStates{
+    SBTVariable *variable = [self.context variableWithName:self.variableName];
+    NSAssert1(variable, @"Caonnot find variable with name %@", self.variableName);
+    variable.value = [self.targetValue copy];
+}
+
 #pragma mark - Update
 
 -(void)updateWithTime:(double)t{

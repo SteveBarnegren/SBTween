@@ -29,6 +29,7 @@
     scheduledAction.reverse = reverse;
     if (reverse) {
         scheduledAction.elapsedTime = action.duration;
+        [action setVariablesToEndStates];
     }
     scheduledAction.action.reverse = reverse;
     return scheduledAction;
