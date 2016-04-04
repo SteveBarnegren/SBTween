@@ -83,7 +83,7 @@
 
 -(void)actionWillStart{
     [super actionWillStart];
-    for (SBTAction *action in self.startActions) {
+    for (SBTAction *action in self.reverse ? self.endActions : self.startActions) {
         [action actionWillStart];
         [action actionWillEnd];
     }
@@ -91,7 +91,7 @@
 
 -(void)actionWillEnd{
     [super actionWillEnd];
-    for (SBTAction *action in self.endActions) {
+    for (SBTAction *action in self.reverse ? self.startActions : self.endActions) {
         [action actionWillStart];
         [action actionWillEnd];
     }
@@ -149,68 +149,45 @@
         startedActionChain = YES;
     }
     
-    NSInteger actionIndex = self.reverse ? self.updateActions.count-1 : 0;
-    for (SBTAction *action in self.reverse? self.updateActions.reverseObjectEnumerator : self.updateActions) {
+    NSInteger actionIndex = 0;
+    if (self.lastRunAction) {
+        actionIndex = [self.updateActions indexOfObject:self.lastRunAction];
+    }
+    else if (self.reverse){
+        actionIndex = self.updateActions.count-1;
+    }
+    
+    while ((self.reverse && actionIndex >= 0) || (!self.reverse && actionIndex < self.updateActions.count)) {
         
-        if (!startedActionChain && action == self.lastRunAction) {
-            startedActionChain = YES;
+        SBTAction *action = self.updateActions[actionIndex];
+        
+        // Start Action
+        if (action != self.lastRunAction) {
+            [self.lastRunAction actionWillEnd];
+            [action actionWillStart];
         }
         
-        if (!startedActionChain) {
-            actionIndex += self.reverse ? -1 : 1;
-            continue;
-        }
-        
+        // Update Action
         double actionStart = startTimes[actionIndex];
         double actionEnd = endTimes[actionIndex];
-
-        // Skipped action
-        if (action != self.lastRunAction
-            && actionStart >= lastElapsedTime
-            && actionEnd < elapsedTime) {
-            
-            [action actionWillStart];
-            [action actionWillEnd];
+        
+        double actionTime = elapsedTime - actionStart;
+        if (!self.reverse && actionTime > action.duration) {
+            actionTime = action.duration;
         }
-        // Current Action
-        else if ((!self.reverse && elapsedTime < actionEnd) || (self.reverse && elapsedTime > actionStart)) {
-            if (self.lastRunAction != action) {
-                [action actionWillStart];
-                self.lastRunAction = action;
-            }
-            [action updateWithElapsedDuration:elapsedTime - actionStart];
+        if (self.reverse && actionTime < 0) {
+            actionTime = 0;
+        }
+        [action updateWithElapsedDuration:actionTime];
+
+        // Break
+        if ((!self.reverse && elapsedTime < actionEnd) || (self.reverse && elapsedTime > actionStart)) {
             break;
         }
-
+        
+        self.lastRunAction = action;
         actionIndex += self.reverse ? -1 : 1;
-        //self.reverse ? actionIndex-- : actionIndex++;
-        
     }
-
-    /*
-    for (SBTAction *action in self.updateActions) {
-        
-        double actionEnd = actionStart + action.duration;
-        
-        // Skipped action
-        if (action != self.lastRunAction && actionStart > lastElapsedTime && actionEnd < elapsedTime) {
-            [action actionWillStart];
-            [action actionWillEnd];
-        }
-        // Current Action
-        else if (elapsedTime < actionStart + action.duration) {
-            if (self.lastRunAction != action) {
-                [action actionWillStart];
-                self.lastRunAction = action;
-            }
-            [action updateWithElapsedDuration:elapsedTime - actionStart];
-            break;
-        }
-        
-        actionStart += action.duration;
-        index++;
-    }
-     */
     
     self.lastUpdateTime = t;
 }

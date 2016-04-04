@@ -115,11 +115,11 @@
     
     action.context = self;
     [action calculateValuesWithVariables:[NSMutableDictionary dictionary]];
-    [action actionWillStart];
     SBTScheduledAction *scheduledAction = [SBTScheduledAction scheduledActionWithAction:action
                                                                                 reverse:reverse
                                                                             updateBlock:updateBlock];
     [self.scheduledActions addObject:scheduledAction];
+    [action actionWillStart];
     if (startRunning) {
         [self startRunLoop];
     }
