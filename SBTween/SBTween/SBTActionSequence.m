@@ -26,7 +26,6 @@
     
     if (self = [super init]) {
         [self setupActionSequenceWithActions:actions];
-        
     }
     
     return self;

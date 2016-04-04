@@ -17,7 +17,8 @@ typedef void (^SBTCompletionBlock)();
 
 @property (nonatomic, weak) SBTContext *context;
 @property (nonatomic, copy) SBTUpdateBlock updateBlock;
-@property (nonatomic, copy) SBTCompletionBlock completionBlock;
+@property (nonatomic, copy) void (^becomeActiveCallback)();
+@property (nonatomic, copy) void (^becomeInactiveCallback)();
 
 @property double duration;
 @property BOOL hasDuration;

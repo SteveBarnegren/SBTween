@@ -67,6 +67,12 @@
                                                                           duration:5];
     
     SBTActionInterpolate *grow = [[SBTActionInterpolate alloc]initWithVariableName:kVN_radius doubleValue:30 duration:3];
+    [grow setBecomeActiveCallback:^{
+        NSLog(@"Grow will become active");
+    }];
+    [grow setBecomeInactiveCallback:^{
+        NSLog(@"Grow will become inactive");
+    }];
     
     SBTActionGroup *moveAndGrowGRP = [[SBTActionGroup alloc]initWithActions:@[move, grow]];
     

@@ -27,8 +27,26 @@
 -(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{/* BASE */}
 -(void)setVariablesToEndStates{/* BASE */}
 -(void)actionWasAddedToContext{/* BASE */}
--(void)actionWillStart{/* BASE */}
--(void)actionWillEnd{/* BASE */}
+-(void)actionWillStart{
+    if (self.becomeActiveCallback) {
+        self.becomeActiveCallback();
+    }
+}
+-(void)actionWillEnd{
+    if (self.becomeInactiveCallback) {
+        self.becomeInactiveCallback();
+    }
+}
+
+#pragma mark - Callbacks
+
+-(void)setBecomeActiveCallback:(void (^)())becomeActiveCallback{
+    NSAssert(self.hasDuration, @"Cannot set active / inactive callbacks on actions without duration");
+}
+
+-(void)setBecomeInactiveCallback:(void (^)())becomeInactiveCallback{
+    NSAssert(self.hasDuration, @"Cannot set active / inactive callbacks on actions without duration");
+}
 
 #pragma mark - Update
 -(void)updateWithElapsedDuration:(double)elapsed{
