@@ -10,6 +10,6 @@
 
 @interface SBTActionCallBlock : SBTAction
 
--(instancetype)initWithBlock:(void (^)())block;
+-(instancetype)initWithBlock:(void (^)(BOOL isReverse))block;
 
 @end

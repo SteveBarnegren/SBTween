@@ -38,11 +38,21 @@
     
     __weak __typeof__(self) weakSelf = self;
     
-    SBTActionCallBlock *callBlock1 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 1"); }];
-    SBTActionCallBlock *callBlock2 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 2"); }];
-    SBTActionCallBlock *callBlock3 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 3"); }];
-    SBTActionCallBlock *callBlock4 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 4"); }];
-    SBTActionCallBlock *callBlock5 = [[SBTActionCallBlock alloc]initWithBlock:^{ NSLog(@"CALL BLOCK 5"); }];
+    SBTActionCallBlock *callBlock1 = [[SBTActionCallBlock alloc]initWithBlock:^(BOOL isReverse) {
+        NSLog(@"CALL BLOCK 1 (%@)", isReverse ? @"Reverse" : @"Forward");
+    }];
+    SBTActionCallBlock *callBlock2 = [[SBTActionCallBlock alloc]initWithBlock:^(BOOL isReverse) {
+        NSLog(@"CALL BLOCK 2 (%@)", isReverse ? @"Reverse" : @"Forward");
+    }];
+    SBTActionCallBlock *callBlock3 = [[SBTActionCallBlock alloc]initWithBlock:^(BOOL isReverse) {
+        NSLog(@"CALL BLOCK 3 (%@)", isReverse ? @"Reverse" : @"Forward");
+    }];
+    SBTActionCallBlock *callBlock4 = [[SBTActionCallBlock alloc]initWithBlock:^(BOOL isReverse) {
+        NSLog(@"CALL BLOCK 4 (%@)", isReverse ? @"Reverse" : @"Forward");
+    }];
+    SBTActionCallBlock *callBlock5 = [[SBTActionCallBlock alloc]initWithBlock:^(BOOL isReverse) {
+        NSLog(@"CALL BLOCK 5 (%@)", isReverse ? @"Reverse" : @"Forward");
+    }];
 
 
     self.context = [[SBTContext alloc]init];
