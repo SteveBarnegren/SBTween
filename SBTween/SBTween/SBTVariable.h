@@ -72,7 +72,7 @@ SBTVec4 SBTVec4Make(double x, double y, double z, double w);
 #pragma mark - SBTVariable
 //**********************************
 
-@interface SBTVariable : NSObject
+@interface SBTVariable : NSObject <NSCopying>
 @property NSString *name;
 @property SBTValue *value;
 

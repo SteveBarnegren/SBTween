@@ -25,12 +25,15 @@ typedef void (^SBTCompletionBlock)();
 
 
 // LifeCycle
+-(void)calculateValuesWithVariables:(NSMutableDictionary*)variables;
+-(void)actionWasAddedToContext;
 -(void)actionWillStart;
 -(void)actionWillEnd;
 
 // Update
 -(void)updateWithElapsedDuration:(double)elapsed;
 -(void)updateWithTime:(double)t;
+
 
 @end
 

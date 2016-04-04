@@ -155,4 +155,13 @@ SBTVec4 SBTVec4Make(double x, double y, double z, double w){
     return self.value.type;
 }
 
+-(id)copyWithZone:(NSZone *)zone{
+    
+    SBTVariable *variable = [[SBTVariable alloc]init];
+    variable.name = self.name;
+    variable.value = self.value;
+    return variable;
+}
+
+
 @end

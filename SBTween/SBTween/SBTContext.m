@@ -107,12 +107,14 @@
 -(void)addAction:(SBTAction*)action updateBlock:(void (^)())updateBlock startRunning:(BOOL)startRunning{
     
     action.context = self;
+    [action calculateValuesWithVariables:[NSMutableDictionary dictionary]];
     [action actionWillStart];
     SBTScheduledAction *scheduledAction = [SBTScheduledAction scheduledActionWithAction:action updateBlock:updateBlock];
     [self.scheduledActions addObject:scheduledAction];
     if (startRunning) {
         [self startRunLoop];
     }
+
 }
 
 -(void)removeScheduledAction:(SBTScheduledAction*)action{

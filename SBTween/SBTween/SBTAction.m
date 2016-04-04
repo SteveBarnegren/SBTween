@@ -22,8 +22,9 @@
     return self;
 }
 
-#pragma makr - LifeCycle
-
+#pragma mark - LifeCycle
+-(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{/* BASE */}
+-(void)actionWasAddedToContext{/* BASE */}
 -(void)actionWillStart{/* BASE */}
 -(void)actionWillEnd{/* BASE */}
 

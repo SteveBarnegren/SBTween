@@ -58,12 +58,29 @@
 
 -(void)actionWillStart{
     [super actionWillStart];
-    NSLog(@"get start value!");
-    self.startValue = [self.context variableWithName:self.variableName].value;
+   // NSLog(@"get start value!");
+    //self.startValue = [self.context variableWithName:self.variableName].value;
+    
+    // Check that start and end value types match
     NSAssert2(self.startValue.type == self.targetValue.type,
               @"Action and Variable types must match! (Action has data type %@, but variable has type %@)",
               SBTValueTypeToString(self.targetValue.type),
               SBTValueTypeToString(self.startValue.type));
+}
+
+-(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{
+
+    SBTVariable *variable = variables[self.variableName];
+    
+    if (!variable) {
+        SBTVariable *contextVariable = [self.context variableWithName:self.variableName];
+        NSAssert(contextVariable, @"Action references varibale not added to context");
+        variable = [contextVariable copy];
+        variables[self.variableName] = variable;
+    }
+    
+    self.startValue = [variable.value copy];
+    variable.value = [self.targetValue copy];
 }
 
 #pragma mark - Update

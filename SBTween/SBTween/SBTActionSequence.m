@@ -75,6 +75,12 @@
 
 }
 
+-(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{
+    for (SBTAction *action in self.allActions) {
+        [action calculateValuesWithVariables:variables];
+    }
+}
+
 -(void)actionWillStart{
     [super actionWillStart];
     for (SBTAction *action in self.startActions) {
