@@ -179,7 +179,7 @@
 
 -(void)setVariablesToEndStates{
     SBTVariable *variable = [self.context variableWithName:self.variableName];
-    NSAssert1(variable, @"Caonnot find variable with name %@", self.variableName);
+    NSAssert1(variable, @"Cannot find variable with name %@", self.variableName);
     variable.value = [self.targetValue copy];
 }
 
