@@ -23,6 +23,7 @@
 		09D3690B1C996A73005CB068 /* SBTVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D3690A1C996A73005CB068 /* SBTVariable.m */; };
 		09D369591C9AC6EC005CB068 /* SBTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D369581C9AC6EC005CB068 /* SBTContext.m */; };
 		09D3695C1C9B242D005CB068 /* SBTActionCallBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */; };
+		09E0BA8A1CB3FEC8006CDA33 /* SBTCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E0BA891CB3FEC8006CDA33 /* SBTCommon.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,8 @@
 		09D369581C9AC6EC005CB068 /* SBTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTContext.m; path = SBTween/SBTContext.m; sourceTree = "<group>"; };
 		09D3695A1C9B242D005CB068 /* SBTActionCallBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionCallBlock.h; path = SBTween/SBTActionCallBlock.h; sourceTree = "<group>"; };
 		09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionCallBlock.m; path = SBTween/SBTActionCallBlock.m; sourceTree = "<group>"; };
+		09E0BA881CB3FEC8006CDA33 /* SBTCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTCommon.h; path = SBTween/SBTCommon.h; sourceTree = "<group>"; };
+		09E0BA891CB3FEC8006CDA33 /* SBTCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTCommon.m; path = SBTween/SBTCommon.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 		09A3EA451C98341B00787BCB /* SBTween */ = {
 			isa = PBXGroup;
 			children = (
+				09E0BA881CB3FEC8006CDA33 /* SBTCommon.h */,
+				09E0BA891CB3FEC8006CDA33 /* SBTCommon.m */,
 				09D369051C99685C005CB068 /* Actions */,
 				09A3EA491C98354000787BCB /* SBTEasing.h */,
 				09A3EA4A1C98354000787BCB /* SBTEasing.m */,
@@ -219,6 +224,7 @@
 				09D3695C1C9B242D005CB068 /* SBTActionCallBlock.m in Sources */,
 				09A3EA361C98340900787BCB /* ViewController.m in Sources */,
 				09D369591C9AC6EC005CB068 /* SBTContext.m in Sources */,
+				09E0BA8A1CB3FEC8006CDA33 /* SBTCommon.m in Sources */,
 				09D3690B1C996A73005CB068 /* SBTVariable.m in Sources */,
 				09A3EA5A1C987A7700787BCB /* SBTActionGroup.m in Sources */,
 				09A3EA331C98340900787BCB /* AppDelegate.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "SBTContext.h"
+#import "SBTCommon.h"
 @import QuartzCore;
 
 //********************************************************
@@ -20,7 +21,6 @@
 @property BOOL running;
 @property (nonatomic, strong) SBTAction *action;
 @property (nonatomic, copy) void (^updateBlock)();
-
 @end
 
 @implementation SBTScheduledAction
@@ -35,7 +35,7 @@
         [action setVariablesToEndStates];
     }
     scheduledAction.action.reverse = reverse;
-    scheduledAction.lastUpdateTime = reverse ? 1.1 : -0.1; // start a little off the scale
+    scheduledAction.lastUpdateTime = reverse ? kSBTActionTimeJustAfter : kSBTActionTimeJustBefore;
     return scheduledAction;
 }
 
@@ -55,6 +55,12 @@
 
 -(void)updateWithTime:(double)t{
     
+    // if the last update wasnt' in range, and neither is this one, discard
+    if (!IsUnitInterpolatorInRange(self.lastUpdateTime) && !IsUnitInterpolatorInRange(t)) {
+        return;
+    }
+    
+    // Set the correct direction
     if (!self.reverse && t < self.lastUpdateTime) {
         self.reverse = YES;
     }
@@ -62,9 +68,20 @@
         self.reverse = NO;
     }
     
-    [self.action updateWithTime:t];
+    // If update is in range, but the last one wasn't, tell the action it will begin
+    if (!IsUnitInterpolatorInRange(self.lastUpdateTime) && IsUnitInterpolatorInRange(t)) {
+        [self.action actionWillStart];
+    }
+    
+    // update time
+    [self.action updateWithTime:ConstrainUnitInterpolator(t)];
     if (self.updateBlock) {
         self.updateBlock();
+    }
+    
+    // If the last update was in range, but this one isn't, end
+    if (IsUnitInterpolatorInRange(self.lastUpdateTime) && !IsUnitInterpolatorInRange(t)) {
+        [self.action actionWillEnd];
     }
     
     self.lastUpdateTime = t;
@@ -227,7 +244,6 @@
         }
         else{
             [scheduledAction updateWithTime:scheduledAction.elapsedTime / scheduledAction.action.duration];
-            //if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
         }
     }
     

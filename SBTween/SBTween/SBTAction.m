@@ -65,9 +65,4 @@
 
 @end
 
-#pragma mark - ****** Helper Functions ******
-double constrainUnitInterpolator(double t){
-    t = MIN(t, 1);
-    t = MAX(t, 0);
-    return t;
-}
+

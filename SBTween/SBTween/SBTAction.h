@@ -39,6 +39,4 @@ typedef void (^SBTCompletionBlock)();
 
 @end
 
-#pragma mark - ****** Helper Functions ******
-double constrainUnitInterpolator(double t);
 

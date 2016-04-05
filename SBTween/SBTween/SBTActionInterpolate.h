@@ -19,6 +19,9 @@ typedef enum : NSUInteger {
 
 @interface SBTActionInterpolate : SBTAction
 
+@property (nonatomic, strong) NSString *variableName;
+
+
 @property (nonatomic, copy) SBTTimingFunction timingFunction;
 
 // Creation (Duration)

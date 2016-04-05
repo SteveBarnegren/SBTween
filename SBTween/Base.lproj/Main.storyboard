@@ -21,8 +21,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bdT-u4-VgK">
-                                <rect key="frame" x="6" y="562" width="588" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="-0.01" minValue="-0.01" maxValue="1.01" translatesAutoresizingMaskIntoConstraints="NO" id="bdT-u4-VgK">
+                                <rect key="frame" x="28" y="562" width="544" height="31"/>
                                 <connections>
                                     <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="nBL-iT-Gh6"/>
                                 </connections>
@@ -31,8 +31,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="wYQ-PG-Wxa" secondAttribute="trailing" id="Ev7-dO-Y0o"/>
-                            <constraint firstAttribute="trailing" secondItem="bdT-u4-VgK" secondAttribute="trailing" constant="8" id="Orv-d8-T5K"/>
-                            <constraint firstItem="bdT-u4-VgK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="alo-Ou-tfH"/>
+                            <constraint firstAttribute="trailing" secondItem="bdT-u4-VgK" secondAttribute="trailing" constant="30" id="Orv-d8-T5K"/>
+                            <constraint firstItem="bdT-u4-VgK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="alo-Ou-tfH"/>
                             <constraint firstItem="wYQ-PG-Wxa" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="hFQ-4m-2Rs"/>
                             <constraint firstItem="bdT-u4-VgK" firstAttribute="top" secondItem="wYQ-PG-Wxa" secondAttribute="bottom" constant="8" id="nWx-Ld-vTv"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bdT-u4-VgK" secondAttribute="bottom" constant="8" id="nrn-lv-1Qt"/>

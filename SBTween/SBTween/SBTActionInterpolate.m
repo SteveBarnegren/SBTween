@@ -11,7 +11,6 @@
 #import "SBTContext.h"
 
 @interface SBTActionInterpolate ()
-@property (nonatomic, strong) NSString *variableName;
 @property (nonatomic, copy) SBTValue *startValue;
 @property (nonatomic, copy) SBTValue *targetValue;
 @property BOOL useSpeedBasedDuration;
@@ -186,6 +185,10 @@
 #pragma mark - Update
 
 -(void)updateWithTime:(double)t{
+    
+    if ([self.variableName isEqualToString:@"radius"]) {
+        NSLog(@"GROW t: %f", t);
+    }
         
     t = MAX(0, t);
     t = MIN(1, t);

@@ -7,6 +7,7 @@
 //
 
 #import "SBTActionSequence.h"
+#import "SBTActionInterpolate.h" // <-- REMOVE THIS
 
 @interface SBTActionSequence ()
 @property (nonatomic, strong) NSArray<SBTAction*> *allActions;
@@ -65,6 +66,12 @@
         }
         self.updateActions = [NSArray arrayWithArray:mutDurationActions];
     }
+}
+
+-(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{
+    for (SBTAction *action in self.allActions) {
+        [action calculateValuesWithVariables:variables];
+    }
     
     // Work out duration
     self.duration = 0;
@@ -72,12 +79,6 @@
         self.duration += action.duration;
     }
 
-}
-
--(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{
-    for (SBTAction *action in self.allActions) {
-        [action calculateValuesWithVariables:variables];
-    }
 }
 
 -(void)actionWillStart{
@@ -94,6 +95,16 @@
         [action actionWillStart];
         [action actionWillEnd];
     }
+    
+    // End the last action in the sequence
+    if (self.updateActions) {
+        SBTAction *lastUpdateAction = self.reverse ? [self.updateActions firstObject] : [self.updateActions lastObject];
+        [lastUpdateAction updateWithTime: self.reverse ? 0 : 1];
+        [lastUpdateAction actionWillEnd];
+    }
+    
+    self.lastRunAction = nil;
+    
 }
 
 -(void)setContext:(SBTContext *)context{
@@ -119,6 +130,8 @@
 #pragma mark - Update
 
 -(void)updateWithTime:(double)t{
+    
+    NSLog(@"SEQUENCE t: %f", t);
     
     /* 
      Need to trigger the beginning callblocks in willStart, and the end call blocks on willEnd:
@@ -162,6 +175,7 @@
         
         // Start Action
         if (action != self.lastRunAction) {
+            [self.lastRunAction updateWithTime:self.reverse ? 0 : 1];
             [self.lastRunAction actionWillEnd];
             [action actionWillStart];
             self.lastRunAction = action;
@@ -172,6 +186,18 @@
         double actionEnd = endTimes[actionIndex];
         
         double actionTime = elapsedTime - actionStart;
+        
+        if ([action isKindOfClass:[SBTActionInterpolate class]]) {
+            NSString *varName = ((SBTActionInterpolate*)action).variableName;
+            if ([varName isEqualToString:@"radius"]) {
+                NSLog(@"GROW *********");
+                NSLog(@"start: %f", actionStart);
+                NSLog(@"end: %f", actionEnd);
+                NSLog(@"action time: %f", actionTime);
+                NSLog(@"**************");
+            }
+        }
+        
         if (!self.reverse && actionTime > action.duration) {
             actionTime = action.duration;
         }
