@@ -191,25 +191,4 @@
     self.lastUpdateTime = t;
 }
 
-/*
--(void)updateWithTime:(double)t{
-    
-    double elapsedTime = t * self.duration;
-    double startOffset = 0;
-    
-    for (SBTAction *action in self.actions) {
-        if (elapsedTime < startOffset + action.duration) {
-            if (self.lastRunAction != action) {
-                [action actionWillStart];
-                self.lastRunAction = action;
-            }
-            [action updateWithElapsedDuration:elapsedTime - startOffset];
-            break;
-        }
-        startOffset += action.duration;
-    }
-    
-}
- */
-
 @end

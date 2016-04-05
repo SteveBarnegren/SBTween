@@ -45,6 +45,9 @@ typedef struct{
 
 SBTVec4 SBTVec4Make(double x, double y, double z, double w);
 
+double SBTVec2Distance(SBTVec2 p1, SBTVec2 p2);
+double SBTVec2DistanceAbs(SBTVec2 p1, SBTVec2 p2);
+
 //**********************************
 #pragma mark - ***** SBTValue *****
 //**********************************
@@ -66,10 +69,26 @@ SBTVec4 SBTVec4Make(double x, double y, double z, double w);
 -(instancetype)initWithVec3Value:(SBTVec3)vec3Value;
 -(instancetype)initWithVec4Value:(SBTVec4)vec4Value;
 
+-(double)distanceFromValue:(SBTValue*)otherValue;
+-(double)absDistanceFromValue:(SBTValue*)otherValue;
+
 @end
 
 //**********************************
-#pragma mark - SBTVariable
+#pragma mark - ***** NSValue (SBTValue) *****
+//**********************************
+
+@interface NSValue (SBTValue)
+
++(NSValue*)valueWithSBTVec2:(SBTVec2)vec2;
+
+-(SBTVec2)sbtVec2Value;
+
+@end
+
+
+//**********************************
+#pragma mark - ***** SBTVariable *****
 //**********************************
 
 @interface SBTVariable : NSObject <NSCopying>

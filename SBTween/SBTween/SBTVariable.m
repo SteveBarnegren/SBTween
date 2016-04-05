@@ -52,6 +52,18 @@ SBTVec4 SBTVec4Make(double x, double y, double z, double w){
     return vec4;
 }
 
+double SBTVec2Distance(SBTVec2 p1, SBTVec2 p2){
+    
+    double xDiff = p2.x - p1.x;
+    double yDiff = p2.y - p1.x;
+    
+    return sqrt((xDiff * xDiff) + (yDiff * yDiff));
+}
+
+double SBTVec2DistanceAbs(SBTVec2 p1, SBTVec2 p2){
+    return fabs(SBTVec2Distance(p1, p2));
+}
+
 //**********************************
 #pragma mark - ***** SBTValue *****
 //**********************************
@@ -101,6 +113,37 @@ SBTVec4 SBTVec4Make(double x, double y, double z, double w){
     return self;
 }
 
+-(double)distanceFromValue:(SBTValue*)otherValue{
+    
+    NSAssert(self.type == otherValue.type, @"SBTValues must have same type to compare distance");
+    
+    double distance;
+    
+    switch (self.type) {
+        case SBTValueTypeDouble:
+            NSAssert(NO, @"Double distance not yet implemented");
+            break;
+        case SBTValueTypeVec2:
+            distance = SBTVec2Distance(self.vec2Value, otherValue.vec2Value);
+            break;
+        case SBTValueTypeVec3:
+            NSAssert(NO, @"Vec3 distance not yet implemented");
+            break;
+        case SBTValueTypeVec4:
+            NSAssert(NO, @"Vec4 distance not yet implemented");
+            break;
+        default:
+            NSAssert(NO, @"Unknown type");
+            break;
+    }
+    
+    return distance;
+}
+
+-(double)absDistanceFromValue:(SBTValue*)otherValue{
+    return fabs([self distanceFromValue:otherValue]);
+}
+
 -(id)copyWithZone:(NSZone *)zone{
     SBTValue *value = [[SBTValue alloc]init];
     value.type = self.type;
@@ -109,6 +152,26 @@ SBTVec4 SBTVec4Make(double x, double y, double z, double w){
     value.vec3Value = self.vec3Value;
     value.vec4Value = self.vec4Value;
     return value;
+}
+
+@end
+
+//**********************************
+#pragma mark - ***** NSValue (SBTValue) *****
+//**********************************
+
+@implementation NSValue (SBTValue)
+
++(NSValue*)valueWithSBTVec2:(SBTVec2)vec2{
+    
+    NSValue *pointValue = [NSValue value:&vec2 withObjCType:@encode(SBTVec2)];
+    return pointValue;
+}
+
+-(SBTVec2)sbtVec2Value{
+    SBTVec2 vec2;
+    [self getValue:&vec2];
+    return vec2;
 }
 
 @end
