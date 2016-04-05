@@ -8,6 +8,7 @@
 
 #import "SBTActionInterpolate.h"
 #import "SBTContext.h"
+#import "SBTCommon.h"
 
 @interface SBTActionInterpolate ()
 @property (nonatomic, strong) NSString *variableName;
@@ -186,12 +187,7 @@
 
 -(void)updateWithTime:(double)t{
     
-    if ([self.variableName isEqualToString:@"radius"]) {
-        NSLog(@"GROW t: %f", t);
-    }
-        
-    t = MAX(0, t);
-    t = MIN(1, t);
+    t = ConstrainUnitInterpolator(t);
     
     if (self.timingFunction) {
         t = self.timingFunction(t);
