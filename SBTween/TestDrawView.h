@@ -12,4 +12,6 @@
 
 -(void)runAnimation;
 
+-(void)sliderChangedToValue:(float)value;
+
 @end

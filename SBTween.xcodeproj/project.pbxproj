@@ -23,7 +23,6 @@
 		09D3690B1C996A73005CB068 /* SBTVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D3690A1C996A73005CB068 /* SBTVariable.m */; };
 		09D369591C9AC6EC005CB068 /* SBTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D369581C9AC6EC005CB068 /* SBTContext.m */; };
 		09D3695C1C9B242D005CB068 /* SBTActionCallBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */; };
-		09E0BA861CB3BEE4006CDA33 /* SBTActionLinePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E0BA851CB3BEE4006CDA33 /* SBTActionLinePath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,8 +56,6 @@
 		09D369581C9AC6EC005CB068 /* SBTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTContext.m; path = SBTween/SBTContext.m; sourceTree = "<group>"; };
 		09D3695A1C9B242D005CB068 /* SBTActionCallBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionCallBlock.h; path = SBTween/SBTActionCallBlock.h; sourceTree = "<group>"; };
 		09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionCallBlock.m; path = SBTween/SBTActionCallBlock.m; sourceTree = "<group>"; };
-		09E0BA841CB3BEE4006CDA33 /* SBTActionLinePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionLinePath.h; path = SBTween/SBTActionLinePath.h; sourceTree = "<group>"; };
-		09E0BA851CB3BEE4006CDA33 /* SBTActionLinePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionLinePath.m; path = SBTween/SBTActionLinePath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,8 +141,6 @@
 				09D369031C988383005CB068 /* SBTActionDelay.m */,
 				09D3695A1C9B242D005CB068 /* SBTActionCallBlock.h */,
 				09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */,
-				09E0BA841CB3BEE4006CDA33 /* SBTActionLinePath.h */,
-				09E0BA851CB3BEE4006CDA33 /* SBTActionLinePath.m */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -222,7 +217,6 @@
 			files = (
 				09A3EA571C98720F00787BCB /* SBTActionSequence.m in Sources */,
 				09D3695C1C9B242D005CB068 /* SBTActionCallBlock.m in Sources */,
-				09E0BA861CB3BEE4006CDA33 /* SBTActionLinePath.m in Sources */,
 				09A3EA361C98340900787BCB /* ViewController.m in Sources */,
 				09D369591C9AC6EC005CB068 /* SBTContext.m in Sources */,
 				09D3690B1C996A73005CB068 /* SBTVariable.m in Sources */,

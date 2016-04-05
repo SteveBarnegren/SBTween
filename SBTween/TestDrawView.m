@@ -24,6 +24,7 @@
 
 @interface TestDrawView ()
 @property (nonatomic, strong) SBTContext *context;
+@property (nonatomic, strong) SBTScheduledAction *scheduledAction;
 @end
 
 @implementation TestDrawView
@@ -78,13 +79,15 @@
     
     SBTActionSequence *moveAndGrowSequence = [[SBTActionSequence alloc]initWithActions:@[callBlock1, move, callBlock2, grow, callBlock3]];
     
-    [self.context addAction:moveAndGrowSequence reverse:YES updateBlock:^{
+    self.scheduledAction = [self.context addAction:moveAndGrowSequence reverse:NO updateBlock:^{
         [weakSelf setNeedsDisplay];
-    } startRunning:YES];
+    } startRunning:NO];
 
 //    [self.context addAction:moveAndGrowSequence updateBlock:^{
 //        [weakSelf setNeedsDisplay];
 //    } startRunning:YES];
+    
+    [self setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -113,6 +116,13 @@
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:circleRect];
     [path fill];
 }
+
+-(void)sliderChangedToValue:(float)value{
+    
+    [self.scheduledAction updateWithTime:value];
+    
+}
+
 
 
 @end

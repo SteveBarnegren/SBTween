@@ -11,6 +11,7 @@
 
 @interface ViewController ()
 @property (nonatomic, strong) TestDrawView *testDrawView;
+@property (nonatomic, weak) IBOutlet UISlider *slider;
 @end
 
 @implementation ViewController
@@ -20,6 +21,8 @@
     
     self.testDrawView = [[TestDrawView alloc]init];
     [self.view addSubview:self.testDrawView];
+    
+    [self.view bringSubviewToFront:self.slider];
     
 }
 
@@ -37,6 +40,10 @@
 -(void)runAnimation{
     NSLog(@"***** Run Animation *****");
     [self.testDrawView runAnimation];
+}
+
+-(IBAction)sliderValueChanged:(id)sender{
+    [self.testDrawView sliderChangedToValue:self.slider.value];
 }
 
 @end

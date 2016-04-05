@@ -13,11 +13,14 @@
 #pragma mark - ******* SBTScheduledAction ******
 //********************************************************
 
-@interface SBTScheduledAction : NSObject
+@interface SBTScheduledAction ()
+@property double lastUpdateTime;
 @property double elapsedTime;
-@property BOOL reverse;
+@property (nonatomic) BOOL reverse;
+@property BOOL running;
 @property (nonatomic, strong) SBTAction *action;
 @property (nonatomic, copy) void (^updateBlock)();
+
 @end
 
 @implementation SBTScheduledAction
@@ -32,7 +35,15 @@
         [action setVariablesToEndStates];
     }
     scheduledAction.action.reverse = reverse;
+    scheduledAction.lastUpdateTime = reverse ? 1.1 : -0.1; // start a little off the scale
     return scheduledAction;
+}
+
+-(void)setReverse:(BOOL)reverse{
+    if (reverse != _reverse) {
+        _reverse = reverse;
+        self.action.reverse = reverse;
+    }
 }
 
 -(instancetype)init{
@@ -40,6 +51,23 @@
         self.elapsedTime = 0;
     }
     return self;
+}
+
+-(void)updateWithTime:(double)t{
+    
+    if (!self.reverse && t < self.lastUpdateTime) {
+        self.reverse = YES;
+    }
+    if (self.reverse && t > self.lastUpdateTime) {
+        self.reverse = NO;
+    }
+    
+    [self.action updateWithTime:t];
+    if (self.updateBlock) {
+        self.updateBlock();
+    }
+    
+    self.lastUpdateTime = t;
 }
 
 @end
@@ -111,7 +139,10 @@
 //}
 
 /* This method could be private and use the above methods for public */
--(void)addAction:(SBTAction*)action reverse:(BOOL)reverse updateBlock:(void (^)())updateBlock startRunning:(BOOL)startRunning{
+-(SBTScheduledAction*)addAction:(SBTAction*)action
+                        reverse:(BOOL)reverse
+                    updateBlock:(void (^)())updateBlock
+                   startRunning:(BOOL)startRunning{
     
     action.context = self;
     [action calculateValuesWithVariables:[NSMutableDictionary dictionary]];
@@ -120,9 +151,11 @@
                                                                             updateBlock:updateBlock];
     [self.scheduledActions addObject:scheduledAction];
     [action actionWillStart];
+    scheduledAction.running = startRunning;
     if (startRunning) {
         [self startRunLoop];
     }
+    return scheduledAction;
 
 }
 
@@ -177,7 +210,7 @@
         scheduledAction.elapsedTime += scheduledAction.reverse ? -dt : dt;
         
         if (scheduledAction.elapsedTime >= scheduledAction.action.duration) {
-            [scheduledAction.action updateWithTime:1.0];
+            [scheduledAction updateWithTime:1.0];
             if (!scheduledAction.reverse) {
                 [scheduledAction.action actionWillEnd];
                 if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
@@ -185,7 +218,7 @@
             }
         }
         else if (scheduledAction.elapsedTime <= 0) {
-            [scheduledAction.action updateWithTime:0];
+            [scheduledAction updateWithTime:0];
             if (scheduledAction.reverse) {
                 [scheduledAction.action actionWillEnd];
                 if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
@@ -193,8 +226,8 @@
             }
         }
         else{
-            [scheduledAction.action updateWithTime:scheduledAction.elapsedTime / scheduledAction.action.duration];
-            if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
+            [scheduledAction updateWithTime:scheduledAction.elapsedTime / scheduledAction.action.duration];
+            //if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
         }
     }
     
