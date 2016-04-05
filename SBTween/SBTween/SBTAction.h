@@ -29,8 +29,8 @@ typedef void (^SBTCompletionBlock)();
 -(void)calculateValuesWithVariables:(NSMutableDictionary*)variables;
 -(void)setVariablesToEndStates;
 -(void)actionWasAddedToContext;
--(void)actionWillStart;
--(void)actionWillEnd;
+-(void)willBecomeActive;
+-(void)willBecomeInactive;
 
 // Update
 -(void)updateWithElapsedDuration:(double)elapsed;

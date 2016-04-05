@@ -46,10 +46,10 @@
     }
 }
 
--(void)actionWillStart{
-    [super actionWillStart];
+-(void)willBecomeActive{
+    [super willBecomeActive];
     for (SBTAction *action in self.actions) {
-        [action actionWillStart];
+        [action willBecomeActive];
     }
 }
 
@@ -87,7 +87,7 @@
         }
         
         if (lastElapsedTime < action.duration && elapsedTime >= action.duration) {
-            [action actionWillEnd];
+            [action willBecomeInactive];
         }
 
     }

@@ -22,8 +22,8 @@
     return self;
 }
 
--(void)actionWillStart{
-    [super actionWillStart];
+-(void)willBecomeActive{
+    [super willBecomeActive];
     if (self.block) {
         self.block(self.reverse);
     }

@@ -70,7 +70,7 @@
     
     // If update is in range, but the last one wasn't, tell the action it will begin
     if (!IsUnitInterpolatorInRange(self.lastUpdateTime) && IsUnitInterpolatorInRange(t)) {
-        [self.action actionWillStart];
+        [self.action willBecomeActive];
     }
     
     // update time
@@ -81,7 +81,7 @@
     
     // If the last update was in range, but this one isn't, end
     if (IsUnitInterpolatorInRange(self.lastUpdateTime) && !IsUnitInterpolatorInRange(t)) {
-        [self.action actionWillEnd];
+        [self.action willBecomeInactive];
     }
     
     self.lastUpdateTime = t;
@@ -167,7 +167,7 @@
                                                                                 reverse:reverse
                                                                             updateBlock:updateBlock];
     [self.scheduledActions addObject:scheduledAction];
-    [action actionWillStart];
+    [action willBecomeActive];
     scheduledAction.running = startRunning;
     if (startRunning) {
         [self startRunLoop];
@@ -229,7 +229,7 @@
         if (scheduledAction.elapsedTime >= scheduledAction.action.duration) {
             [scheduledAction updateWithTime:1.0];
             if (!scheduledAction.reverse) {
-                [scheduledAction.action actionWillEnd];
+                [scheduledAction.action willBecomeInactive];
                 if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
                 [actionsToRemove addObject:scheduledAction];
             }
@@ -237,7 +237,7 @@
         else if (scheduledAction.elapsedTime <= 0) {
             [scheduledAction updateWithTime:0];
             if (scheduledAction.reverse) {
-                [scheduledAction.action actionWillEnd];
+                [scheduledAction.action willBecomeInactive];
                 if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
                 [actionsToRemove addObject:scheduledAction];
             }

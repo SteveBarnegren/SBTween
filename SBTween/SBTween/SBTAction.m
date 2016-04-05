@@ -27,12 +27,12 @@
 -(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{/* BASE */}
 -(void)setVariablesToEndStates{/* BASE */}
 -(void)actionWasAddedToContext{/* BASE */}
--(void)actionWillStart{
+-(void)willBecomeActive{
     if (self.becomeActiveCallback) {
         self.becomeActiveCallback();
     }
 }
--(void)actionWillEnd{
+-(void)willBecomeInactive{
     if (self.becomeInactiveCallback) {
         self.becomeInactiveCallback();
     }

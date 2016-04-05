@@ -81,26 +81,26 @@
 
 }
 
--(void)actionWillStart{
-    [super actionWillStart];
+-(void)willBecomeActive{
+    [super willBecomeActive];
     for (SBTAction *action in self.reverse ? self.endActions : self.startActions) {
-        [action actionWillStart];
-        [action actionWillEnd];
+        [action willBecomeActive];
+        [action willBecomeInactive];
     }
 }
 
 -(void)actionWillEnd{
-    [super actionWillEnd];
+    [super willBecomeInactive];
     for (SBTAction *action in self.reverse ? self.startActions : self.endActions) {
-        [action actionWillStart];
-        [action actionWillEnd];
+        [action willBecomeInactive];
+        [action willBecomeActive];
     }
     
     // End the last action in the sequence
     if (self.updateActions) {
         SBTAction *lastUpdateAction = self.reverse ? [self.updateActions firstObject] : [self.updateActions lastObject];
         [lastUpdateAction updateWithTime: self.reverse ? 0 : 1];
-        [lastUpdateAction actionWillEnd];
+        [lastUpdateAction willBecomeInactive];
     }
     
     self.lastRunAction = nil;
@@ -176,8 +176,8 @@
         // Start Action
         if (action != self.lastRunAction) {
             [self.lastRunAction updateWithTime:self.reverse ? 0 : 1];
-            [self.lastRunAction actionWillEnd];
-            [action actionWillStart];
+            [self.lastRunAction willBecomeInactive];
+            [action willBecomeActive];
             self.lastRunAction = action;
         }
         

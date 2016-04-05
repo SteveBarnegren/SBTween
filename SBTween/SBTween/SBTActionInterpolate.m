@@ -101,8 +101,8 @@
 
 #pragma mark - LifeCycle
 
--(void)actionWillStart{
-    [super actionWillStart];
+-(void)willBecomeActive{
+    [super willBecomeActive];
    // NSLog(@"get start value!");
     //self.startValue = [self.context variableWithName:self.variableName].value;
     
