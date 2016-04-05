@@ -20,7 +20,7 @@
 
 @implementation SBTActionInterpolate
 
-#pragma mark - Creation
+#pragma mark - Creation (Duration)
 
 -(instancetype)initWithVariableName:(NSString*)name doubleValue:(double)doubleValue duration:(double)duration{
     if (self = [super init]) {
@@ -58,6 +58,18 @@
     return self;
 }
 
+#pragma mark - Creation (Speed)
+
+-(instancetype)initWithVariableName:(NSString*)name doubleValue:(double)doubleValue speed:(double)speed{
+    if (self = [super init]) {
+        self.speed = speed;
+        self.useSpeedBasedDuration = YES;
+        self.variableName = [NSString stringWithString:name];
+        self.targetValue = [SBTValue valueWithDouble:doubleValue];
+    }
+    return self;
+}
+
 -(instancetype)initWithVariableName:(NSString*)name vec2Value:(SBTVec2)vec2Value speed:(double)speed{
     if (self = [super init]) {
         self.speed = speed;
@@ -67,6 +79,28 @@
     }
     return self;
 }
+
+-(instancetype)initWithVariableName:(NSString*)name vec3Value:(SBTVec3)vec3Value speed:(double)speed{
+    if (self = [super init]) {
+        self.speed = speed;
+        self.useSpeedBasedDuration = YES;
+        self.variableName = [NSString stringWithString:name];
+        self.targetValue = [SBTValue valueWithVec3:vec3Value];
+    }
+    return self;
+}
+
+-(instancetype)initWithVariableName:(NSString*)name vec4Value:(SBTVec4)vec4Value speed:(double)speed{
+    if (self = [super init]) {
+        self.speed = speed;
+        self.useSpeedBasedDuration = YES;
+        self.variableName = [NSString stringWithString:name];
+        self.targetValue = [SBTValue valueWithVec4:vec4Value];
+    }
+    return self;
+}
+
+#pragma mark - LifeCycle
 
 -(void)actionWillStart{
     [super actionWillStart];
@@ -104,16 +138,41 @@
 -(void)setDurationBasedOnSpeed{
     
     switch (self.targetValue.type) {
+        case SBTValueTypeDouble:
+        {
+            double dist = fabs(self.targetValue.doubleValue - self.startValue.doubleValue);
+            self.duration = dist / self.speed;
+        }
+            break;
         case SBTValueTypeVec2:
         {
             double xDiff = self.targetValue.vec2Value.x - self.startValue.vec2Value.x;
             double yDiff = self.targetValue.vec2Value.y - self.startValue.vec2Value.y;
-            double dist = sqrt((xDiff * xDiff)+(yDiff * yDiff));
-            self.duration = dist / self.speed;
+            double dist = sqrt((xDiff * xDiff) + (yDiff * yDiff));
+            self.duration = fabs(dist / self.speed);
         }
             break;
-            
+        case SBTValueTypeVec3:
+        {
+            double xDiff = self.targetValue.vec3Value.x - self.startValue.vec3Value.x;
+            double yDiff = self.targetValue.vec3Value.y - self.startValue.vec3Value.y;
+            double zDiff = self.targetValue.vec3Value.z - self.startValue.vec3Value.z;
+            double dist = sqrt((xDiff * xDiff) + (yDiff * yDiff) + (zDiff * zDiff));
+            self.duration = fabs(dist / self.speed);
+        }
+            break;
+        case SBTValueTypeVec4:
+        {
+            double xDiff = self.targetValue.vec4Value.x - self.startValue.vec4Value.x;
+            double yDiff = self.targetValue.vec4Value.y - self.startValue.vec4Value.y;
+            double zDiff = self.targetValue.vec4Value.z - self.startValue.vec4Value.z;
+            double wDiff = self.targetValue.vec4Value.z - self.startValue.vec4Value.z;
+            double dist = sqrt((xDiff * xDiff) + (yDiff * yDiff) + (zDiff * zDiff) + (wDiff * wDiff));
+            self.duration = fabs(dist / self.speed);
+        }
+            break;
         default:
+            NSAssert(NO, @"Unknown value type");
             break;
     }
 }
