@@ -164,6 +164,7 @@
         if (action != self.lastRunAction) {
             [self.lastRunAction actionWillEnd];
             [action actionWillStart];
+            self.lastRunAction = action;
         }
         
         // Update Action
@@ -184,7 +185,6 @@
             break;
         }
         
-        self.lastRunAction = action;
         actionIndex += self.reverse ? -1 : 1;
     }
     

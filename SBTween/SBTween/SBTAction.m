@@ -42,10 +42,12 @@
 
 -(void)setBecomeActiveCallback:(void (^)())becomeActiveCallback{
     NSAssert(self.hasDuration, @"Cannot set active / inactive callbacks on actions without duration");
+    _becomeActiveCallback = becomeActiveCallback;
 }
 
 -(void)setBecomeInactiveCallback:(void (^)())becomeInactiveCallback{
     NSAssert(self.hasDuration, @"Cannot set active / inactive callbacks on actions without duration");
+    _becomeInactiveCallback = becomeInactiveCallback;
 }
 
 #pragma mark - Update
