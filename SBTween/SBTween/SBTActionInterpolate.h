@@ -15,7 +15,6 @@ typedef double (^SBTTimingFunction)(double t);
 
 @interface SBTActionInterpolate : SBTAction
 
-@property (nonatomic, strong) NSString *variableName;
 
 
 @property (nonatomic, copy) SBTTimingFunction timingFunction;

@@ -187,17 +187,6 @@
         
         double actionTime = elapsedTime - actionStart;
         
-        if ([action isKindOfClass:[SBTActionInterpolate class]]) {
-            NSString *varName = ((SBTActionInterpolate*)action).variableName;
-            if ([varName isEqualToString:@"radius"]) {
-                NSLog(@"GROW *********");
-                NSLog(@"start: %f", actionStart);
-                NSLog(@"end: %f", actionEnd);
-                NSLog(@"action time: %f", actionTime);
-                NSLog(@"**************");
-            }
-        }
-        
         if (!self.reverse && actionTime > action.duration) {
             actionTime = action.duration;
         }

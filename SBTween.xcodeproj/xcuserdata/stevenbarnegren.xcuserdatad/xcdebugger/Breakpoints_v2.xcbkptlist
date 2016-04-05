@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SBTween/SBTween/SBTActionInterpolate.m"
-            timestampString = "481564294.32952"
+            timestampString = "481565656.616382"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "-willBecomeActive"
             landmarkType = "5">
          </BreakpointContent>

@@ -120,13 +120,13 @@
 			children = (
 				09E0BA881CB3FEC8006CDA33 /* SBTCommon.h */,
 				09E0BA891CB3FEC8006CDA33 /* SBTCommon.m */,
-				09D369051C99685C005CB068 /* Actions */,
 				09A3EA491C98354000787BCB /* SBTEasing.h */,
 				09A3EA4A1C98354000787BCB /* SBTEasing.m */,
 				09D369571C9AC6EC005CB068 /* SBTContext.h */,
 				09D369581C9AC6EC005CB068 /* SBTContext.m */,
 				09D369091C996A73005CB068 /* SBTVariable.h */,
 				09D3690A1C996A73005CB068 /* SBTVariable.m */,
+				09D369051C99685C005CB068 /* Actions */,
 			);
 			name = SBTween;
 			sourceTree = "<group>";

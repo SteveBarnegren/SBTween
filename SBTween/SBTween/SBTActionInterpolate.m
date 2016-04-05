@@ -10,6 +10,7 @@
 #import "SBTContext.h"
 
 @interface SBTActionInterpolate ()
+@property (nonatomic, strong) NSString *variableName;
 @property (nonatomic, copy) SBTValue *startValue;
 @property (nonatomic, copy) SBTValue *targetValue;
 @property BOOL useSpeedBasedDuration;
