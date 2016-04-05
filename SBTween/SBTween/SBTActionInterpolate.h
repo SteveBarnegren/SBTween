@@ -7,15 +7,11 @@
 //
 
 #import "SBTAction.h"
+#import "SBTEasing.h"
 
 typedef double (^SBTTimingFunction)(double t);
 
-typedef enum : NSUInteger {
-    SBTTimingModeLinear,
-    SBTTimingModeEaseExponentialIn,
-    SBTTimingModeEaseExponentialOut,
-    SBTTimingModeEaseExponentialInOut,
-} SBTTimingMode;
+
 
 @interface SBTActionInterpolate : SBTAction
 

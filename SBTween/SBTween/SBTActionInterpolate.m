@@ -7,7 +7,6 @@
 //
 
 #import "SBTActionInterpolate.h"
-#import "SBTEasing.h"
 #import "SBTContext.h"
 
 @interface SBTActionInterpolate ()
@@ -251,30 +250,13 @@
 
 -(void)setTimingFunctionWithMode:(SBTTimingMode)timingMode{
     
-    switch (timingMode) {
-            // Linear
-        case SBTTimingModeLinear:
-            self.timingFunction = nil;
-            break;
-            // Ease Exponential
-        case SBTTimingModeEaseExponentialIn:
-            self.timingFunction = ^double(double t){
-                return [SBTEasing easeExponentialIn:t];
-            };
-            break;
-        case SBTTimingModeEaseExponentialOut:
-            self.timingFunction = ^double(double t){
-                return [SBTEasing easeExponentialOut:t];
-            };
-            break;
-        case SBTTimingModeEaseExponentialInOut:
-            self.timingFunction = ^double(double t){
-                return [SBTEasing easeExponentialInOut:t];
-            };
-            break;
-        default:
-            break;
+    if (timingMode == SBTTimingModeLinear) {
+        self.timingFunction = nil;
     }
+    else{
+        self.timingFunction = [SBTEasing timingFunctionWithMode:timingMode];
+    }
+    
 }
 
 

@@ -8,7 +8,34 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    SBTTimingModeLinear,
+    
+    SBTTimingModeEaseSineIn,
+    SBTTimingModeEaseSineOut,
+    SBTTimingModeEaseSineInOut,
+    
+    SBTTimingModeEaseExponentialIn,
+    SBTTimingModeEaseExponentialOut,
+    SBTTimingModeEaseExponentialInOut,
+    
+    SBTTimingModeEaseBackIn,
+    SBTTimingModeEaseBackOut,
+    SBTTimingModeEaseBackInOut,
+    
+    SBTTimingModeEaseBounceIn,
+    SBTTimingModeEaseBounceOut,
+    SBTTimingModeEaseBounceInOut,
+    
+    SBTTimingModeEaseElasticIn,
+    SBTTimingModeEaseElasticOut,
+    SBTTimingModeEaseElasticInOut,
+    
+} SBTTimingMode;
+
 @interface SBTEasing : NSObject
+
++(double (^)(double t))timingFunctionWithMode:(SBTTimingMode)timingMode;
 
 #pragma mark - Ease Sine
 
