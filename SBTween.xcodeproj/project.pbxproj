@@ -26,6 +26,7 @@
 		09E0BA8A1CB3FEC8006CDA33 /* SBTCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E0BA891CB3FEC8006CDA33 /* SBTCommon.m */; };
 		09E0BA8D1CB6587D006CDA33 /* SBTActionRepeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E0BA8C1CB6587D006CDA33 /* SBTActionRepeat.m */; };
 		09E0BA921CB68DAB006CDA33 /* SBTActionYoYo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E0BA911CB68DAB006CDA33 /* SBTActionYoYo.m */; };
+		67143C691CB712A200526E93 /* SBTActionSetValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 67143C681CB712A200526E93 /* SBTActionSetValue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,8 @@
 		09E0BA8C1CB6587D006CDA33 /* SBTActionRepeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionRepeat.m; path = SBTween/SBTActionRepeat.m; sourceTree = "<group>"; };
 		09E0BA901CB68DAB006CDA33 /* SBTActionYoYo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionYoYo.h; path = SBTween/SBTActionYoYo.h; sourceTree = "<group>"; };
 		09E0BA911CB68DAB006CDA33 /* SBTActionYoYo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionYoYo.m; path = SBTween/SBTActionYoYo.m; sourceTree = "<group>"; };
+		67143C671CB712A200526E93 /* SBTActionSetValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionSetValue.h; path = SBTween/SBTActionSetValue.h; sourceTree = "<group>"; };
+		67143C681CB712A200526E93 /* SBTActionSetValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionSetValue.m; path = SBTween/SBTActionSetValue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,8 @@
 				09E0BA8C1CB6587D006CDA33 /* SBTActionRepeat.m */,
 				09E0BA901CB68DAB006CDA33 /* SBTActionYoYo.h */,
 				09E0BA911CB68DAB006CDA33 /* SBTActionYoYo.m */,
+				67143C671CB712A200526E93 /* SBTActionSetValue.h */,
+				67143C681CB712A200526E93 /* SBTActionSetValue.m */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				09E0BA8D1CB6587D006CDA33 /* SBTActionRepeat.m in Sources */,
 				09A3EA511C985C3300787BCB /* TestDrawView.m in Sources */,
 				09A3EA4E1C9858C500787BCB /* SBTActionInterpolate.m in Sources */,
+				67143C691CB712A200526E93 /* SBTActionSetValue.m in Sources */,
 				09D369041C988383005CB068 /* SBTActionDelay.m in Sources */,
 				09A3EA481C9834A200787BCB /* SBTAction.m in Sources */,
 				09A3EA301C98340900787BCB /* main.m in Sources */,

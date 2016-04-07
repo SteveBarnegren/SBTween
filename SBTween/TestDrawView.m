@@ -16,6 +16,7 @@
 #import "SBTActionRepeat.h"
 #import "SBTActionCallBlock.h"
 #import "SBTActionYoyo.h"
+#import "SBTActionSetValue.h"
 
 #define kRadius 5
 
@@ -143,7 +144,9 @@
     [[SBTActionInterpolate alloc]initWithVariableName:kVN_Position vec2Value:SBTVec2Make([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height * 0.9) duration:2];
     [moveToBottom setTimingFunctionWithMode:SBTTimingModeEaseExponentialInOut];
     
-    SBTActionSequence *masterSequence = [[SBTActionSequence alloc]initWithActions:@[moveAndGrowGRP, moveToBottom]];
+    SBTActionSetValue *setValueAction = [[SBTActionSetValue alloc]initWithVariableName:kVN_Position vec2Value:SBTVec2Make(175, 100)];
+    
+    SBTActionSequence *masterSequence = [[SBTActionSequence alloc]initWithActions:@[moveAndGrowGRP, setValueAction, moveToBottom]];
     
     SBTActionRepeat *sequenceRepeat = [[SBTActionRepeat alloc]initWithAction:masterSequence numRepeats:3];
     SBTActionYoYo *sequenceYoyo = [[SBTActionYoYo alloc]initWithAction:masterSequence];
