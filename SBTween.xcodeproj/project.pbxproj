@@ -25,6 +25,7 @@
 		09D3695C1C9B242D005CB068 /* SBTActionCallBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */; };
 		09E0BA8A1CB3FEC8006CDA33 /* SBTCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E0BA891CB3FEC8006CDA33 /* SBTCommon.m */; };
 		09E0BA8D1CB6587D006CDA33 /* SBTActionRepeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E0BA8C1CB6587D006CDA33 /* SBTActionRepeat.m */; };
+		09E0BA921CB68DAB006CDA33 /* SBTActionYoYo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E0BA911CB68DAB006CDA33 /* SBTActionYoYo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		09E0BA891CB3FEC8006CDA33 /* SBTCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTCommon.m; path = SBTween/SBTCommon.m; sourceTree = "<group>"; };
 		09E0BA8B1CB6587D006CDA33 /* SBTActionRepeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionRepeat.h; path = SBTween/SBTActionRepeat.h; sourceTree = "<group>"; };
 		09E0BA8C1CB6587D006CDA33 /* SBTActionRepeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionRepeat.m; path = SBTween/SBTActionRepeat.m; sourceTree = "<group>"; };
+		09E0BA901CB68DAB006CDA33 /* SBTActionYoYo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBTActionYoYo.h; path = SBTween/SBTActionYoYo.h; sourceTree = "<group>"; };
+		09E0BA911CB68DAB006CDA33 /* SBTActionYoYo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBTActionYoYo.m; path = SBTween/SBTActionYoYo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 				09D3695B1C9B242D005CB068 /* SBTActionCallBlock.m */,
 				09E0BA8B1CB6587D006CDA33 /* SBTActionRepeat.h */,
 				09E0BA8C1CB6587D006CDA33 /* SBTActionRepeat.m */,
+				09E0BA901CB68DAB006CDA33 /* SBTActionYoYo.h */,
+				09E0BA911CB68DAB006CDA33 /* SBTActionYoYo.m */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09A3EA571C98720F00787BCB /* SBTActionSequence.m in Sources */,
+				09E0BA921CB68DAB006CDA33 /* SBTActionYoYo.m in Sources */,
 				09D3695C1C9B242D005CB068 /* SBTActionCallBlock.m in Sources */,
 				09A3EA361C98340900787BCB /* ViewController.m in Sources */,
 				09D369591C9AC6EC005CB068 /* SBTContext.m in Sources */,
