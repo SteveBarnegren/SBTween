@@ -13,6 +13,7 @@
 #import "SBTActionDelay.h"
 #import "SBTVariable.h"
 #import "SBTContext.h"
+#import "SBTActionRepeat.h"
 #import "SBTActionCallBlock.h"
 
 #define kRadius 5
@@ -143,9 +144,11 @@
     
     SBTActionSequence *masterSequence = [[SBTActionSequence alloc]initWithActions:@[moveAndGrowGRP, moveToBottom]];
     
-    self.scheduledAction = [self.context addAction:masterSequence reverse:YES updateBlock:^{
+    SBTActionRepeat *sequenceRepeat = [[SBTActionRepeat alloc]initWithAction:masterSequence numRepeats:3];
+    
+    self.scheduledAction = [self.context addAction:sequenceRepeat reverse:NO updateBlock:^{
         [weakSelf setNeedsDisplay];
-    } startRunning:NO];
+    } startRunning:YES];
     
     //    [self.context addAction:moveAndGrowSequence updateBlock:^{
     //        [weakSelf setNeedsDisplay];

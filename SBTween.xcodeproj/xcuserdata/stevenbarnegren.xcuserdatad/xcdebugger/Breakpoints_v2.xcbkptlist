@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SBTween/TestDrawView.m"
-            timestampString = "481566587.752016"
+            timestampString = "481720294.593003"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "-sliderChangedToValue:"
             landmarkType = "5">
          </BreakpointContent>
