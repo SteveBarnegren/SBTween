@@ -10,6 +10,6 @@
 
 @interface SBTActionYoYo : SBTAction
 
-
+-(instancetype)initWithAction:(SBTAction*)action;
 
 @end

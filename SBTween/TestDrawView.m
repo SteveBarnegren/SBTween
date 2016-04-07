@@ -15,6 +15,7 @@
 #import "SBTContext.h"
 #import "SBTActionRepeat.h"
 #import "SBTActionCallBlock.h"
+#import "SBTActionYoyo.h"
 
 #define kRadius 5
 
@@ -145,8 +146,9 @@
     SBTActionSequence *masterSequence = [[SBTActionSequence alloc]initWithActions:@[moveAndGrowGRP, moveToBottom]];
     
     SBTActionRepeat *sequenceRepeat = [[SBTActionRepeat alloc]initWithAction:masterSequence numRepeats:3];
+    SBTActionYoYo *sequenceYoyo = [[SBTActionYoYo alloc]initWithAction:masterSequence];
     
-    self.scheduledAction = [self.context addAction:sequenceRepeat reverse:NO updateBlock:^{
+    self.scheduledAction = [self.context addAction:sequenceYoyo reverse:NO updateBlock:^{
         [weakSelf setNeedsDisplay];
     } startRunning:YES];
     
