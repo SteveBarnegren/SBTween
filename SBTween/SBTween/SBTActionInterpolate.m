@@ -12,6 +12,7 @@
 
 @interface SBTActionInterpolate ()
 @property (nonatomic, strong) NSString *variableName;
+@property (nonatomic, strong) SBTVariable *variable;
 @property (nonatomic, copy) SBTValue *startValue;
 @property (nonatomic, copy) SBTValue *targetValue;
 @property BOOL useSpeedBasedDuration;
@@ -107,6 +108,8 @@
    // NSLog(@"get start value!");
     //self.startValue = [self.context variableWithName:self.variableName].value;
     
+    self.variable = [self.context variableWithName:self.variableName];
+
     // Check that start and end value types match
     NSAssert2(self.startValue.type == self.targetValue.type,
               @"Action and Variable types must match! (Action has data type %@, but variable has type %@)",
@@ -187,6 +190,8 @@
 
 -(void)updateWithTime:(double)t{
     
+    NSAssert(self.variable, @"Variable cannot be nil!");
+    
     t = ConstrainUnitInterpolator(t);
     
     if (self.timingFunction) {
@@ -195,13 +200,12 @@
     
     if (self.context) {
         // We can cache the variable in order to reduce the number of calls to the dictionary
-        SBTVariable *variable = [self.context variableWithName:self.variableName];
         
         switch (self.targetValue.type) {
-            case SBTValueTypeDouble: [self updateVariable:variable doubleValueWithTime:t]; break;
-            case SBTValueTypeVec2: [self updateVariable:variable vec2ValueWithTime:t]; break;
-            case SBTValueTypeVec3: [self updateVariable:variable vec3ValueWithTime:t]; break;
-            case SBTValueTypeVec4: [self updateVariable:variable vec4ValueWithTime:t]; break;
+            case SBTValueTypeDouble: [self updateVariable:self.variable doubleValueWithTime:t]; break;
+            case SBTValueTypeVec2: [self updateVariable:self.variable vec2ValueWithTime:t]; break;
+            case SBTValueTypeVec3: [self updateVariable:self.variable vec3ValueWithTime:t]; break;
+            case SBTValueTypeVec4: [self updateVariable:self.variable vec4ValueWithTime:t]; break;
             default:
                 NSAssert(NO, @"Unknown value type");
                 break;
