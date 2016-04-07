@@ -87,6 +87,8 @@
         [action willBecomeActive];
         [action willBecomeInactive];
     }
+    
+    self.lastRunAction = nil;
 }
 
 -(void)actionWillEnd{

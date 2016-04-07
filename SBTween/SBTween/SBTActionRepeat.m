@@ -62,6 +62,8 @@
     NSInteger repeatNumber = (NSInteger)actionTime;
     actionTime = actionTime - repeatNumber;
     
+    NSLog(@"repeat number: %@", @(repeatNumber));
+    
     if (repeatNumber != self.lastUpdateRepeatNumber) {
         if (self.hasPerformedFirstUpdate) {
             [self.action willBecomeInactive];
@@ -70,7 +72,7 @@
     }
     self.lastUpdateRepeatNumber = repeatNumber;
     
-    [self.action updateWithTime:t];
+    [self.action updateWithTime:actionTime];
     self.hasPerformedFirstUpdate = YES;
 }
 
