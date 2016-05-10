@@ -13,4 +13,6 @@
 // Creation
 -(instancetype)initWithActions:(NSArray<SBTAction*>*)actions;
 
+-(void)addAction:(SBTAction*)action atEnd:(BOOL)fromEnd;
+
 @end

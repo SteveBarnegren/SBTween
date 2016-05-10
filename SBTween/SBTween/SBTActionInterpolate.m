@@ -117,6 +117,11 @@
               SBTValueTypeToString(self.startValue.type));
 }
 
+-(void)willBecomeInactive{
+    [super willBecomeInactive];
+    [self updateWithTime:self.reverse ? 0 : 1];
+}
+
 #pragma mark - Setup values and variables state
 
 -(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{

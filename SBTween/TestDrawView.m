@@ -128,7 +128,7 @@
                                                                           duration: 5];
     [move setTimingFunctionWithMode:SBTTimingModeEaseElasticOut];
     
-    SBTActionInterpolate *grow = [[SBTActionInterpolate alloc]initWithVariableName:kVN_radius doubleValue:30 duration:3];
+    SBTActionInterpolate *grow = [[SBTActionInterpolate alloc]initWithVariableName:kVN_radius doubleValue:30 duration:1];
     [grow setBecomeActiveCallback:^{
         NSLog(@"Grow will become active");
     }];
@@ -136,7 +136,8 @@
         NSLog(@"Grow will become inactive");
     }];
     
-    SBTActionGroup *moveAndGrowGRP = [[SBTActionGroup alloc]initWithActions:@[move, grow]];
+    SBTActionGroup *moveAndGrowGRP = [[SBTActionGroup alloc]initWithActions:@[move]];
+    [moveAndGrowGRP addAction:grow atEnd:YES];
     
     SBTActionSequence *moveAndGrowSequence = [[SBTActionSequence alloc]initWithActions:@[callBlock1, move, callBlock2, grow, callBlock3]];
     
@@ -146,7 +147,7 @@
     
     SBTActionSetValue *setValueAction = [[SBTActionSetValue alloc]initWithVariableName:kVN_Position vec2Value:SBTVec2Make(175, 100)];
     
-    SBTActionSequence *masterSequence = [[SBTActionSequence alloc]initWithActions:@[moveAndGrowGRP, setValueAction, moveToBottom]];
+    SBTActionSequence *masterSequence = [[SBTActionSequence alloc]initWithActions:@[moveAndGrowGRP, moveToBottom]];
     
     SBTActionRepeat *sequenceRepeat = [[SBTActionRepeat alloc]initWithAction:masterSequence numRepeats:3];
     SBTActionYoYo *sequenceYoyo = [[SBTActionYoYo alloc]initWithAction:masterSequence];
