@@ -55,6 +55,10 @@
     self.tableView.frame = [UIScreen mainScreen].bounds;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 30.0;
     
     UINib *headerNib = [UINib nibWithNibName:NSStringFromClass([EasingHeaderCell class]) bundle:nil];
     [self.tableView registerNib:headerNib forCellReuseIdentifier:NSStringFromClass([EasingHeaderCell class])];
@@ -160,6 +164,7 @@
 
 }
 
+/*
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     id info = self.cellInfos[indexPath.row];
@@ -172,6 +177,7 @@
     }
     
 }
+ */
 
 
 @end

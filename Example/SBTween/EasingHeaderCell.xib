@@ -15,17 +15,36 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6c-aC-WlQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                        <rect key="frame" x="138.5" y="2" width="43.5" height="39.5"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FB-XE-Rom" userLabel="RightLine">
+                        <rect key="frame" x="190" y="21" width="122" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="xuS-7R-Vnk"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFn-d8-cpa" userLabel="LeftLine">
+                        <rect key="frame" x="8" y="20.5" width="122.5" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="qxS-Il-7J0"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="D6c-aC-WlQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Fvg-mD-FBL"/>
-                    <constraint firstAttribute="trailing" secondItem="D6c-aC-WlQ" secondAttribute="trailing" id="Vue-wk-G6Z"/>
-                    <constraint firstAttribute="bottom" secondItem="D6c-aC-WlQ" secondAttribute="bottom" id="a3p-dR-kYD"/>
-                    <constraint firstItem="D6c-aC-WlQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="l3b-Mj-wFi"/>
+                    <constraint firstItem="QFn-d8-cpa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Ka3-8T-cUJ"/>
+                    <constraint firstAttribute="bottom" secondItem="D6c-aC-WlQ" secondAttribute="bottom" constant="2" id="ak9-g9-dpF"/>
+                    <constraint firstItem="5FB-XE-Rom" firstAttribute="leading" secondItem="D6c-aC-WlQ" secondAttribute="trailing" constant="8" id="bKs-x3-yIZ"/>
+                    <constraint firstItem="D6c-aC-WlQ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="lmM-K5-z7P"/>
+                    <constraint firstAttribute="trailing" secondItem="5FB-XE-Rom" secondAttribute="trailing" constant="8" id="rI8-Yz-N1h"/>
+                    <constraint firstItem="D6c-aC-WlQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="rkK-dZ-fje"/>
+                    <constraint firstItem="D6c-aC-WlQ" firstAttribute="leading" secondItem="QFn-d8-cpa" secondAttribute="trailing" constant="8" id="tlr-Pr-hKb"/>
+                    <constraint firstItem="QFn-d8-cpa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xvl-WL-giO"/>
+                    <constraint firstItem="5FB-XE-Rom" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zM6-1b-KN3"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

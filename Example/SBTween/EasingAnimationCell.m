@@ -8,8 +8,6 @@
 
 #import "EasingAnimationCell.h"
 
-
-
 @interface EasingAnimationCell ()
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -41,6 +39,7 @@
 }
 
 -(void)setTitle:(NSString*)title{
+    
     self.titleLabel.text = title;
 }
 
