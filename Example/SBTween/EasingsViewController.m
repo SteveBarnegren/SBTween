@@ -73,10 +73,12 @@
     [self.context addVariable:variable];
     
     // Action
-    SBTActionInterpolate *action = [[SBTActionInterpolate alloc]initWithVariableName:variableName doubleValue:1 duration:2];
-    [action setTimingFunctionWithMode:SBTTimingModeLinear];
-    //SBTActionYoYo *yoyoAction = [[SBTActionYoYo alloc]initWithAction:action];
-    SBTActionRepeat *repeatAction = [[SBTActionRepeat alloc]initWithAction:action numRepeats:1000];
+    SBTActionInterpolate *interpolate = [[SBTActionInterpolate alloc]initWithVariableName:variableName doubleValue:1 duration:2];
+    [interpolate setTimingFunctionWithMode:SBTTimingModeLinear];
+    SBTActionDelay *delay = [[SBTActionDelay alloc]initWithDelay:1];
+    SBTActionSequence *sequence = [[SBTActionSequence alloc]initWithActions:@[interpolate , delay]];
+    
+    SBTActionRepeat *repeatAction = [[SBTActionRepeat alloc]initWithAction:sequence numRepeats:1000];
     
     __weak __typeof__(self) weakSelf = self;
     [self.context addAction:repeatAction reverse:NO updateBlock:^{
@@ -104,7 +106,7 @@
     
     SBTVariable *variable = [self.context variableWithName:@"Linear interpolator"];
     self.interpolationAmount = variable.value.doubleValue;
-    NSLog(@"call back value: %f", self.interpolationAmount);
+    //NSLog(@"call back value: %f", self.interpolationAmount);
     
     for (UITableViewCell *cell in self.tableView.visibleCells) {
         

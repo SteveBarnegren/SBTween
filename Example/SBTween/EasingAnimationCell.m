@@ -56,7 +56,7 @@
 
 -(void)positionHandle{
     
-    const float horizontalMargin = 16;
+    const float horizontalMargin = 32;
     
     float titleBottom = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height;
     float handleTop = titleBottom + 8;
