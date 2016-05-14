@@ -197,7 +197,7 @@
     if (!self.displayLink) {
         self.hasReferenceFrameTimeStamp = NO;
         self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick)];
-        [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
 }
 
