@@ -1,0 +1,6 @@
+framework module SBTween {
+  umbrella header "SBTween-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SBTween_Example' do
+  pod 'SBTween', :path => '../'
+
+  #target 'SBTween_Tests' do
+   # inherit! :search_paths
+
+    
+  #end
+end

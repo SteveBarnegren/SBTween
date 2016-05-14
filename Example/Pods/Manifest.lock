@@ -1,0 +1,14 @@
+PODS:
+  - SBTween (0.1.0)
+
+DEPENDENCIES:
+  - SBTween (from `../`)
+
+EXTERNAL SOURCES:
+  SBTween:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SBTween: 05b6d5c0223d45812cf0a2e10e1f6cd77781b9e8
+
+COCOAPODS: 0.39.0
