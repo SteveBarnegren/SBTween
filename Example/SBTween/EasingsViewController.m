@@ -89,6 +89,17 @@
     
 }
 
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    
+    const float topMargin = [UIApplication sharedApplication].statusBarFrame.size.height;
+    
+    self.tableView.frame = CGRectMake(0,
+                                      topMargin,
+                                      self.view.frame.size.width,
+                                      self.view.frame.size.height - topMargin);
+}
+
 -(void)actionCallBack{
     
     SBTVariable *variable = [self.context variableWithName:@"Linear interpolator"];
