@@ -14,6 +14,7 @@
 
 @property (nonatomic) SBTTimingMode timingMode;
 
+-(void)setTitle:(NSString*)title;
 -(void)updateWithTime:(CFTimeInterval)t;
 
 @end

@@ -24,6 +24,8 @@
 		672322B11CE3DB12004647E4 /* EasingAnimationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 672322AF1CE3DB12004647E4 /* EasingAnimationCell.m */; };
 		672322B21CE3DB12004647E4 /* EasingAnimationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 672322B01CE3DB12004647E4 /* EasingAnimationCell.xib */; };
 		67905C4D1CE3D48E009E83C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67905C4C1CE3D48E009E83C9 /* LaunchScreen.storyboard */; };
+		67B8C2CC1CE7942400E0D9F3 /* EasingHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B8C2CA1CE7942400E0D9F3 /* EasingHeaderCell.m */; };
+		67B8C2CD1CE7942400E0D9F3 /* EasingHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67B8C2CB1CE7942400E0D9F3 /* EasingHeaderCell.xib */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		BF5EC15567258A5D07749D21 /* Pods_SBTween_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCFEE8D2AFDC35EFB200D76E /* Pods_SBTween_Example.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +67,9 @@
 		672322AF1CE3DB12004647E4 /* EasingAnimationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasingAnimationCell.m; sourceTree = "<group>"; };
 		672322B01CE3DB12004647E4 /* EasingAnimationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EasingAnimationCell.xib; sourceTree = "<group>"; };
 		67905C4C1CE3D48E009E83C9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		67B8C2C91CE7942400E0D9F3 /* EasingHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasingHeaderCell.h; sourceTree = "<group>"; };
+		67B8C2CA1CE7942400E0D9F3 /* EasingHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasingHeaderCell.m; sourceTree = "<group>"; };
+		67B8C2CB1CE7942400E0D9F3 /* EasingHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EasingHeaderCell.xib; sourceTree = "<group>"; };
 		7E2558EE0165596842959394 /* Pods-SBTween_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBTween_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBTween_Example/Pods-SBTween_Example.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8D16A5C5EADF563E3EEAAA7C /* Pods-SBTween_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBTween_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBTween_Example/Pods-SBTween_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +155,9 @@
 				672322A91CE3D982004647E4 /* ExamplesViewController.m */,
 				672322AB1CE3DA38004647E4 /* EasingsViewController.h */,
 				672322AC1CE3DA38004647E4 /* EasingsViewController.m */,
+				67B8C2C91CE7942400E0D9F3 /* EasingHeaderCell.h */,
+				67B8C2CA1CE7942400E0D9F3 /* EasingHeaderCell.m */,
+				67B8C2CB1CE7942400E0D9F3 /* EasingHeaderCell.xib */,
 				672322AE1CE3DB12004647E4 /* EasingAnimationCell.h */,
 				672322AF1CE3DB12004647E4 /* EasingAnimationCell.m */,
 				672322B01CE3DB12004647E4 /* EasingAnimationCell.xib */,
@@ -282,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				67B8C2CD1CE7942400E0D9F3 /* EasingHeaderCell.xib in Resources */,
 				672322B21CE3DB12004647E4 /* EasingAnimationCell.xib in Resources */,
 				67905C4D1CE3D48E009E83C9 /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
@@ -353,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* AppDelegate.m in Sources */,
+				67B8C2CC1CE7942400E0D9F3 /* EasingHeaderCell.m in Sources */,
 				672322B11CE3DB12004647E4 /* EasingAnimationCell.m in Sources */,
 				672322AA1CE3D982004647E4 /* ExamplesViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

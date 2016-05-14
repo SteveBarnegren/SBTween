@@ -8,10 +8,33 @@
 
 #import "EasingsViewController.h"
 #import "EasingAnimationCell.h"
+#import "EasingHeaderCell.h"
 #import "SBTween.h"
+
+#pragma mark - ***** EasingCellInfo *****
+
+@interface EasingCellInfo : NSObject
+@property SBTTimingMode timingMode;
+@property (nonatomic, strong) NSString *name;
+@end
+
+@implementation EasingCellInfo
+
++(instancetype)infoWithTimingMode:(SBTTimingMode)timingMode name:(NSString*)name{
+    
+    EasingCellInfo *info = [[EasingCellInfo alloc]init];
+    info.timingMode = timingMode;
+    info.name = name;
+    return info;
+}
+
+@end
+
+#pragma mark - ***** EasingsViewController *****
 
 @interface EasingsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *cellInfos;
 
 @property (nonatomic, strong) SBTContext *context;
 @property double interpolationAmount;
@@ -33,6 +56,9 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    UINib *headerNib = [UINib nibWithNibName:NSStringFromClass([EasingHeaderCell class]) bundle:nil];
+    [self.tableView registerNib:headerNib forCellReuseIdentifier:NSStringFromClass([EasingHeaderCell class])];
+    
     UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([EasingAnimationCell class]) bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:NSStringFromClass([EasingAnimationCell class])];
     
@@ -45,15 +71,16 @@
     // Action
     SBTActionInterpolate *action = [[SBTActionInterpolate alloc]initWithVariableName:variableName doubleValue:1 duration:2];
     [action setTimingFunctionWithMode:SBTTimingModeLinear];
-    SBTActionYoYo *yoyoAction = [[SBTActionYoYo alloc]initWithAction:action];
-    SBTActionRepeat *repeatAction = [[SBTActionRepeat alloc]initWithAction:yoyoAction numRepeats:1000];
+    //SBTActionYoYo *yoyoAction = [[SBTActionYoYo alloc]initWithAction:action];
+    SBTActionRepeat *repeatAction = [[SBTActionRepeat alloc]initWithAction:action numRepeats:1000];
     
     __weak __typeof__(self) weakSelf = self;
-    [self.context addAction:action reverse:NO updateBlock:^{
+    [self.context addAction:repeatAction reverse:NO updateBlock:^{
         [weakSelf actionCallBack];
     } startRunning:YES];
     
     //Reload
+    [self createCellInfos];
     [self.tableView reloadData];
     
 }
@@ -73,6 +100,37 @@
     
 }
 
+-(void)createCellInfos{
+    
+    NSMutableArray *mutInfos = [[NSMutableArray alloc]init];
+    
+    [mutInfos addObject:@"Linear"];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeLinear name:@"Linear"]];
+    [mutInfos addObject:@"Sine"];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseSineIn name:@"SineIn"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseSineOut name:@"SineOut"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseSineInOut name:@"SineInOut"]];
+    [mutInfos addObject:@"Exponential"];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseExponentialIn name:@"ExponentialIn"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseExponentialOut name:@"ExponentialOut"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseExponentialInOut name:@"ExponentialInOut"]];
+    [mutInfos addObject:@"Back"];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseBackIn name:@"BackIn"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseBackOut name:@"BackOut"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseBackInOut name:@"BackInOut"]];
+    [mutInfos addObject:@"Bounce"];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseBounceIn name:@"BounceIn"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseBounceOut name:@"BounceOut"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseBounceInOut name:@"BounceInOut"]];
+    [mutInfos addObject:@"Elastic"];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseElasticIn name:@"ElasticIn"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseElasticOut name:@"ElasticOut"]];
+    [mutInfos addObject:[EasingCellInfo infoWithTimingMode:SBTTimingModeEaseElasticInOut name:@"ElasticInOut"]];
+    
+    self.cellInfos = [NSArray arrayWithArray:mutInfos];
+
+}
+
 #pragma mark - UITableView Datasource / Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -80,18 +138,39 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 15;
+    return self.cellInfos.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    EasingAnimationCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EasingAnimationCell class])];
-    cell.timingMode = indexPath.row;
-    return cell;
+    id info = self.cellInfos[indexPath.row];
+    
+    if ([info isKindOfClass:[EasingCellInfo class]]) {
+        
+        EasingAnimationCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EasingAnimationCell class])];
+        cell.timingMode = ((EasingCellInfo*)info).timingMode;
+        [cell setTitle:((EasingCellInfo*)info).name];
+        return cell;
+    }
+    else{
+        EasingHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([EasingHeaderCell class])];
+        cell.title = info;
+        return cell;
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    
+    id info = self.cellInfos[indexPath.row];
+    
+    if ([info isKindOfClass:[EasingCellInfo class]]) {
+        return 60;
+    }
+    else{
+        return 30;
+    }
+    
 }
 
 
