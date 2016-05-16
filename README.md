@@ -1,9 +1,14 @@
 # SBTween
 
-[![CI Status](http://img.shields.io/travis/Steve Barnegren/SBTween.svg?style=flat)](https://travis-ci.org/Steve Barnegren/SBTween)
 [![Version](https://img.shields.io/cocoapods/v/SBTween.svg?style=flat)](http://cocoapods.org/pods/SBTween)
 [![License](https://img.shields.io/cocoapods/l/SBTween.svg?style=flat)](http://cocoapods.org/pods/SBTween)
 [![Platform](https://img.shields.io/cocoapods/p/SBTween.svg?style=flat)](http://cocoapods.org/pods/SBTween)
+
+SBTween is a functional, but not quite finished, tweening library for iOS that I've been working on.
+
+SBTween has a pod spec, but hasn't yet been released as a CocoaPod.
+
+For the most recent changes, use the development branch.
 
 ## Example
 
