@@ -26,6 +26,7 @@
     
     self.timingMode = SBTTimingModeLinear;
     self.interpolationAmount = 0;
+    self.animatablePct = 0.5;
     
     // Circle layer
     self.handle = [[CALayer alloc]init];
@@ -56,13 +57,15 @@
 
 -(void)positionHandle{
     
-    const float horizontalMargin = 32;
+    
     
     float titleBottom = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height;
     float handleTop = titleBottom + 8;
     float handleBottom = self.frame.size.height - 8;
     
     float handleSize = (handleBottom - handleTop);
+    float horizontalMargin = self.frame.size.width * (1-self.animatablePct) * 0.5;
+
     
     float mostLeftX = horizontalMargin;
     float mostRightX = self.contentView.bounds.size.width - handleSize - horizontalMargin;

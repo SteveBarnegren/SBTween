@@ -12,6 +12,8 @@
 
 @interface EasingAnimationCell : UITableViewCell
 
+@property float animatablePct;
+
 @property (nonatomic) SBTTimingMode timingMode;
 
 -(void)setTitle:(NSString*)title;
