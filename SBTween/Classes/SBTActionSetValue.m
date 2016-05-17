@@ -23,7 +23,7 @@
 
 -(instancetype)init{
     if (self = [super init]) {
-        self.hasDuration = NO;
+        self.durationType = SBTDurationTypeNone;
     }
     return self;
 }

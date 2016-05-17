@@ -17,7 +17,7 @@
 -(instancetype)initWithBlock:(void (^)(BOOL isReverse))block{
     if (self = [super init]) {
         self.block = block;
-        self.hasDuration = NO;
+        self.durationType = SBTDurationTypeNone;
     }
     return self;
 }

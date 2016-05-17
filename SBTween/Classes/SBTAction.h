@@ -10,6 +10,12 @@
 #import "SBTVariable.h"
 @class SBTContext;
 
+typedef enum : NSUInteger {
+    SBTDurationTypeNone,
+    SBTDurationTypeFinite,
+    SBTDurationTypeInfinite,
+} SBTDurationType;
+
 typedef void (^SBTUpdateBlock)(double t);
 typedef void (^SBTCompletionBlock)();
 
@@ -20,8 +26,8 @@ typedef void (^SBTCompletionBlock)();
 @property (nonatomic, copy) void (^becomeActiveCallback)();
 @property (nonatomic, copy) void (^becomeInactiveCallback)();
 
+@property SBTDurationType durationType;
 @property double duration;
-@property BOOL hasDuration;
 @property BOOL reverse;
 @property (nonatomic, strong) NSArray<SBTVariable*> *variables;
 
@@ -35,6 +41,9 @@ typedef void (^SBTCompletionBlock)();
 // Update
 -(void)updateWithElapsedDuration:(double)elapsed;
 -(void)updateWithTime:(double)t;
+
+// Query
+-(BOOL)hasDuration;
 
 
 @end

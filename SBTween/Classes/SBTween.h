@@ -14,6 +14,7 @@
 #import "SBTActionGroup.h"
 #import "SBTActionInterpolate.h"
 #import "SBTActionRepeat.h"
+#import "SBTActionRepeatForever.h"
 #import "SBTActionSequence.h"
 #import "SBTActionSetValue.h"
 #import "SBTActionYoYo.h"

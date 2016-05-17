@@ -17,7 +17,7 @@
 
 -(instancetype)init{
     if (self = [super init]) {
-        self.hasDuration = YES;
+        self.durationType = SBTDurationTypeFinite;
         self.reverse = NO;
     }
     return self;
@@ -41,7 +41,7 @@
 #pragma mark - Callbacks
 
 -(void)setBecomeActiveCallback:(void (^)())becomeActiveCallback{
-    NSAssert(self.hasDuration, @"Cannot set active / inactive callbacks on actions without duration");
+    NSAssert(self.durationType, @"Cannot set active / inactive callbacks on actions without duration");
     _becomeActiveCallback = becomeActiveCallback;
 }
 
@@ -62,6 +62,13 @@
 }
 
 -(void)updateWithTime:(double)t{/* BASE */}
+
+#pragma mark - Query
+
+-(BOOL)hasDuration{
+    return self.durationType == SBTDurationTypeNone ? NO : YES;
+}
+
 
 @end
 
