@@ -58,13 +58,19 @@
         [action calculateValuesWithVariables:variables];
     }
     
-    // Work out duration
-    self.duration = 0;
+    // Set duration type
+    self.durationType = [[self class]durationTypeForActions:self.allActions];
     
-    for (SBTAction *action in self.allActions) {
-        if (action.duration > self.duration) {
-            self.duration = action.duration;
+    // Work out duration
+    if (self.durationType != SBTDurationTypeInfinite) {
+        self.duration = 0;
+        
+        for (SBTAction *action in self.allActions) {
+            if (action.duration > self.duration) {
+                self.duration = action.duration;
+            }
         }
+
     }
 }
 

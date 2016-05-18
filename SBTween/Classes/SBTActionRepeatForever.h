@@ -10,4 +10,6 @@
 
 @interface SBTActionRepeatForever : SBTAction
 
+- (instancetype)initWithAction:(SBTAction*)action;
+
 @end

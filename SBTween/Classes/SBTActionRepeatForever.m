@@ -28,6 +28,7 @@
         self.action = action;
         self.lastUpdateRepeatNumber = -1;
         self.hasPerformedFirstUpdate = NO;
+        self.duration = -1;
     }
     return self;
 }

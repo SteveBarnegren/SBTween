@@ -21,6 +21,7 @@
 @property BOOL running;
 @property (nonatomic, strong) SBTAction *action;
 @property (nonatomic, copy) void (^updateBlock)();
+@property SBTDurationType durationType;
 @end
 
 @implementation SBTScheduledAction
@@ -30,6 +31,7 @@
     scheduledAction.action = action;
     scheduledAction.updateBlock = updateBlock;
     scheduledAction.reverse = reverse;
+    scheduledAction.durationType = action.durationType;
     if (reverse) {
         scheduledAction.elapsedTime = action.duration;
         [action setVariablesToEndStates];
@@ -85,6 +87,18 @@
     }
     
     self.lastUpdateTime = t;
+}
+
+-(void)updateInfinteActionWithElapsedTime:(double)elaspsedTime{
+    
+    NSAssert(self.action.durationType == SBTDurationTypeInfinite, @"updateInfinteActionwithElapsedTime: must only be called on action with infinite duration!");
+    
+    [self.action updateWithElapsedDuration:elaspsedTime];
+    
+    if (self.updateBlock) {
+        self.updateBlock();
+    }
+
 }
 
 @end
@@ -226,25 +240,33 @@
     for (SBTScheduledAction *scheduledAction in self.scheduledActions) {
         scheduledAction.elapsedTime += scheduledAction.reverse ? -dt : dt;
         
-        if (scheduledAction.elapsedTime >= scheduledAction.action.duration) {
-            [scheduledAction updateWithTime:1.0];
-            if (!scheduledAction.reverse) {
-                [scheduledAction.action willBecomeInactive];
-                if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
-                [actionsToRemove addObject:scheduledAction];
+        // Update finite time action
+        if (scheduledAction.durationType != SBTDurationTypeInfinite) {
+            if (scheduledAction.elapsedTime >= scheduledAction.action.duration) {
+                [scheduledAction updateWithTime:1.0];
+                if (!scheduledAction.reverse) {
+                    [scheduledAction.action willBecomeInactive];
+                    if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
+                    [actionsToRemove addObject:scheduledAction];
+                }
+            }
+            else if (scheduledAction.elapsedTime <= 0) {
+                [scheduledAction updateWithTime:0];
+                if (scheduledAction.reverse) {
+                    [scheduledAction.action willBecomeInactive];
+                    if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
+                    [actionsToRemove addObject:scheduledAction];
+                }
+            }
+            else{
+                [scheduledAction updateWithTime:scheduledAction.elapsedTime / scheduledAction.action.duration];
             }
         }
-        else if (scheduledAction.elapsedTime <= 0) {
-            [scheduledAction updateWithTime:0];
-            if (scheduledAction.reverse) {
-                [scheduledAction.action willBecomeInactive];
-                if (scheduledAction.updateBlock) { scheduledAction.updateBlock(); }
-                [actionsToRemove addObject:scheduledAction];
-            }
-        }
+        // Update infinte time action
         else{
-            [scheduledAction updateWithTime:scheduledAction.elapsedTime / scheduledAction.action.duration];
+            [scheduledAction updateInfinteActionWithElapsedTime:scheduledAction.elapsedTime];
         }
+        
     }
     
     for (SBTScheduledAction *scheduledAction in actionsToRemove) {

@@ -73,12 +73,17 @@
         [action calculateValuesWithVariables:variables];
     }
     
+    // Set duration type
+    self.durationType = [[self class]durationTypeForActions:self.allActions];
+    
     // Work out duration
-    self.duration = 0;
-    for (SBTAction *action in self.updateActions) {
-        self.duration += action.duration;
+    if (self.durationType != SBTDurationTypeInfinite) {
+        self.duration = 0;
+        for (SBTAction *action in self.updateActions) {
+            self.duration += action.duration;
+        }
     }
-
+   
 }
 
 -(void)willBecomeActive{

@@ -78,7 +78,7 @@
     SBTActionDelay *delay = [[SBTActionDelay alloc]initWithDelay:1];
     SBTActionSequence *sequence = [[SBTActionSequence alloc]initWithActions:@[interpolate , delay]];
     
-    SBTActionRepeat *repeatAction = [[SBTActionRepeat alloc]initWithAction:sequence numRepeats:3];
+    SBTActionRepeatForever *repeatAction = [[SBTActionRepeatForever alloc]initWithAction:sequence];
     
     __weak __typeof__(self) weakSelf = self;
     [self.context addAction:repeatAction reverse:NO updateBlock:^{

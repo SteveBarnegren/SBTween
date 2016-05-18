@@ -15,6 +15,27 @@
 
 @implementation SBTAction
 
+#pragma mark - Class Methods
++(SBTDurationType)durationTypeForActions:(NSArray*)actions{
+    
+    SBTDurationType type = SBTDurationTypeNone;
+    
+    for (SBTAction *action in actions) {
+        
+        if (type == SBTDurationTypeNone && action.durationType == SBTDurationTypeFinite) {
+            type = SBTDurationTypeFinite;
+        }
+        if (action.durationType == SBTDurationTypeInfinite){
+            type = SBTDurationTypeInfinite;
+            break;
+        }
+    }
+    
+    return type;
+}
+
+#pragma mark - LifeCycle
+
 -(instancetype)init{
     if (self = [super init]) {
         self.durationType = SBTDurationTypeFinite;
@@ -23,7 +44,6 @@
     return self;
 }
 
-#pragma mark - LifeCycle
 -(void)calculateValuesWithVariables:(NSMutableDictionary*)variables{/* BASE */}
 -(void)setVariablesToEndStates{/* BASE */}
 -(void)actionWasAddedToContext{/* BASE */}
@@ -63,7 +83,7 @@
 
 -(void)updateWithTime:(double)t{/* BASE */}
 
-#pragma mark - Query
+#pragma mark - Duration
 
 -(BOOL)hasDuration{
     return self.durationType == SBTDurationTypeNone ? NO : YES;

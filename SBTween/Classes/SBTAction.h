@@ -31,6 +31,9 @@ typedef void (^SBTCompletionBlock)();
 @property BOOL reverse;
 @property (nonatomic, strong) NSArray<SBTVariable*> *variables;
 
+//Class Methods
++(SBTDurationType)durationTypeForActions:(NSArray*)actions;
+
 // LifeCycle
 -(void)calculateValuesWithVariables:(NSMutableDictionary*)variables;
 -(void)setVariablesToEndStates;
@@ -42,9 +45,8 @@ typedef void (^SBTCompletionBlock)();
 -(void)updateWithElapsedDuration:(double)elapsed;
 -(void)updateWithTime:(double)t;
 
-// Query
+// Duration
 -(BOOL)hasDuration;
-
 
 @end
 
