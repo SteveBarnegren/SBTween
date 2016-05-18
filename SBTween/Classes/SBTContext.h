@@ -36,5 +36,6 @@
                         reverse:(BOOL)reverse
                     updateBlock:(void (^)())updateBlock
                    startRunning:(BOOL)startRunning;
+-(void)removeScheduledAction:(SBTScheduledAction*)action;
 
 @end

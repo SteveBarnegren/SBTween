@@ -19,6 +19,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		670011401CEC4880004735B7 /* ScratchPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6700113F1CEC4880004735B7 /* ScratchPadViewController.m */; };
 		672322AA1CE3D982004647E4 /* ExamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 672322A91CE3D982004647E4 /* ExamplesViewController.m */; };
 		672322AD1CE3DA38004647E4 /* EasingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 672322AC1CE3DA38004647E4 /* EasingsViewController.m */; };
 		672322B11CE3DB12004647E4 /* EasingAnimationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 672322AF1CE3DB12004647E4 /* EasingAnimationCell.m */; };
@@ -62,6 +63,8 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		6129828D08191E5F073AB1E7 /* Pods-SBTween_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBTween_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBTween_Example/Pods-SBTween_Example.release.xcconfig"; sourceTree = "<group>"; };
 		61A2BF8A9DBD761EA293668D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		6700113E1CEC4880004735B7 /* ScratchPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchPadViewController.h; sourceTree = "<group>"; };
+		6700113F1CEC4880004735B7 /* ScratchPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScratchPadViewController.m; sourceTree = "<group>"; };
 		672322A81CE3D982004647E4 /* ExamplesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamplesViewController.h; sourceTree = "<group>"; };
 		672322A91CE3D982004647E4 /* ExamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamplesViewController.m; sourceTree = "<group>"; };
 		672322AB1CE3DA38004647E4 /* EasingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasingsViewController.h; sourceTree = "<group>"; };
@@ -144,14 +147,9 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				672322A81CE3D982004647E4 /* ExamplesViewController.h */,
 				672322A91CE3D982004647E4 /* ExamplesViewController.m */,
-				672322AB1CE3DA38004647E4 /* EasingsViewController.h */,
-				672322AC1CE3DA38004647E4 /* EasingsViewController.m */,
-				67B8C2C91CE7942400E0D9F3 /* EasingHeaderCell.h */,
-				67B8C2CA1CE7942400E0D9F3 /* EasingHeaderCell.m */,
-				67B8C2CB1CE7942400E0D9F3 /* EasingHeaderCell.xib */,
-				672322AE1CE3DB12004647E4 /* EasingAnimationCell.h */,
-				672322AF1CE3DB12004647E4 /* EasingAnimationCell.m */,
-				672322B01CE3DB12004647E4 /* EasingAnimationCell.xib */,
+				6700113E1CEC4880004735B7 /* ScratchPadViewController.h */,
+				6700113F1CEC4880004735B7 /* ScratchPadViewController.m */,
+				6700113D1CEC4854004735B7 /* Easings example */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -198,6 +196,21 @@
 				61A2BF8A9DBD761EA293668D /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		6700113D1CEC4854004735B7 /* Easings example */ = {
+			isa = PBXGroup;
+			children = (
+				672322AB1CE3DA38004647E4 /* EasingsViewController.h */,
+				672322AC1CE3DA38004647E4 /* EasingsViewController.m */,
+				67B8C2C91CE7942400E0D9F3 /* EasingHeaderCell.h */,
+				67B8C2CA1CE7942400E0D9F3 /* EasingHeaderCell.m */,
+				67B8C2CB1CE7942400E0D9F3 /* EasingHeaderCell.xib */,
+				672322AE1CE3DB12004647E4 /* EasingAnimationCell.h */,
+				672322AF1CE3DB12004647E4 /* EasingAnimationCell.m */,
+				672322B01CE3DB12004647E4 /* EasingAnimationCell.xib */,
+			);
+			name = "Easings example";
 			sourceTree = "<group>";
 		};
 		6FF9F48959724A0800C817C2 /* Pods */ = {
@@ -366,6 +379,7 @@
 				672322B11CE3DB12004647E4 /* EasingAnimationCell.m in Sources */,
 				672322AA1CE3D982004647E4 /* ExamplesViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				670011401CEC4880004735B7 /* ScratchPadViewController.m in Sources */,
 				672322AD1CE3DA38004647E4 /* EasingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
