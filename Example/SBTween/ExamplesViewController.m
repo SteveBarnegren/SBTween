@@ -20,16 +20,16 @@
     [super viewDidLoad];
     
     // show the easings view controller
-//    EasingsViewController *viewController = [[EasingsViewController alloc]init];
-//    [self addChildViewController:viewController];
-//    [self.view addSubview:viewController.view];
-//    viewController.view.frame = [UIScreen mainScreen].bounds;
-//    
-    // Show the scratch pad view controller
-    ScratchPadViewController *viewController = [[ScratchPadViewController alloc]init];
+    EasingsViewController *viewController = [[EasingsViewController alloc]init];
     [self addChildViewController:viewController];
     [self.view addSubview:viewController.view];
     viewController.view.frame = [UIScreen mainScreen].bounds;
+//
+    // Show the scratch pad view controller
+//    ScratchPadViewController *viewController = [[ScratchPadViewController alloc]init];
+//    [self addChildViewController:viewController];
+//    [self.view addSubview:viewController.view];
+//    viewController.view.frame = [UIScreen mainScreen].bounds;
     
 }
 
