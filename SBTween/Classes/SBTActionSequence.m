@@ -138,14 +138,14 @@
 
 -(void)updateWithTime:(double)t{
     
-    NSLog(@"SEQUENCE t: %f", t);
+    //NSLog(@"SEQUENCE t: %f", t);
     
     /* 
      Need to trigger the beginning callblocks in willStart, and the end call blocks on willEnd:
      when actions are passed in, split into three arrays, beginning callblocks, end call blocks, and update actions
      */
     
-    double lastElapsedTime = self.lastUpdateTime * self.duration;
+    //double lastElapsedTime = self.lastUpdateTime * self.duration;
     double elapsedTime = t * self.duration;
    
     // Get actions begin and end times

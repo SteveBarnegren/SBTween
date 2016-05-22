@@ -48,6 +48,8 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
+    __weak __typeof__(self) weakSelf = self;
+    
     self.animationContext = [[SBTContext alloc]init];
     SBTVariable *variable = [[SBTVariable alloc]initWithName:kVariableName vec2Value:SBTVec2Make(0, 0)];
     [self.animationContext addVariable:variable];
@@ -56,9 +58,9 @@
     
     self.scheduledAction = [self.animationContext addAction:interpolateAction reverse:NO updateBlock:^{
         
-        SBTVariable *variable = [self.animationContext variableWithName:kVariableName];
+        SBTVariable *variable = [weakSelf.animationContext variableWithName:kVariableName];
         SBTVec2 value = variable.value.vec2Value;
-        self.label.text = [NSString stringWithFormat:@"%f/%f", value.x, value.y];
+        weakSelf.label.text = [NSString stringWithFormat:@"%f/%f", value.x, value.y];
         
     } startRunning:YES];
 

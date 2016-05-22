@@ -117,7 +117,7 @@ double SBTVec2DistanceAbs(SBTVec2 p1, SBTVec2 p2){
     
     NSAssert(self.type == otherValue.type, @"SBTValues must have same type to compare distance");
     
-    double distance;
+    double distance = 0;
     
     switch (self.type) {
         case SBTValueTypeDouble:
