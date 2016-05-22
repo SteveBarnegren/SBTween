@@ -130,13 +130,11 @@
 +(double)easeSineOut:(double)t{
     
     return sinf(t * (double)M_PI_2);
-    
 }
 
 +(double)easeSineInOut:(double)t{
     
-    return sinf(t * (double)M_PI_2);
-    
+    return -0.5f*(cosf( (float)M_PI*t) - 1);
 }
 
 #pragma mark - Ease Exponential
