@@ -40,7 +40,7 @@ Create varibles / actions:
     SBTContext *context = [[SBTContext alloc]init];
     
 // Add variables to context
-     SBTVariable *variable = [[SBTVariable alloc]initWithName:@"ViewX" doubleValue:0];
+     SBTVariable *variable = [[SBTVariable alloc]initWithName:@"SomeVariable" doubleValue:0];
     [context addVariable:variable];
 
 // Create actions
