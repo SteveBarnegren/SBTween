@@ -61,9 +61,7 @@
     
     double actionT = elapsed / self.action.duration;
     NSInteger repeatNumber = actionT;
-    
-    NSLog(@"repeat number: %@", @(repeatNumber));
-    
+        
     if (repeatNumber != self.lastUpdateRepeatNumber) {
         if (self.hasPerformedFirstUpdate) {
             [self.action willBecomeInactive];
