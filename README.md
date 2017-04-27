@@ -4,6 +4,14 @@
 [![License](https://img.shields.io/cocoapods/l/SBTween.svg?style=flat)](http://cocoapods.org/pods/SBTween)
 [![Platform](https://img.shields.io/cocoapods/p/SBTween.svg?style=flat)](http://cocoapods.org/pods/SBTween)
 
+Note: As most of the projects I work on now are in Swift, I have decided to stop working on SBTween.
+
+I have developed a production ready tweening library written in Swift called [TweenKit](https://github.com/SteveBarnegren/TweenKit)
+
+SBTween does work, and I've used it in a couple of shipping apps, but it was never quite finished, so it's a bit rough around the edges.
+
+###About
+
 SBTween is a functional, but not quite finished, tweening library for iOS.
 
 SBTween was initially designed to facilitate the development of the 'scrubbable animation' on-boarding experiences that have become popular in mobile applications recently. These usually involve a UIPageViewController with text on each page. As the user scrolls, animations are played in sync with the user's scrolling. The Philips Hue app has a good example of this type of on-boarding experience.
